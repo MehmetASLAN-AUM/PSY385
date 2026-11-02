@@ -1,0 +1,448 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Chapters 3–5 Exam Prep</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: sticky progress bar; one column of chapter checklists (concept rows with a 1–5 self-rating), reflections, then a live readiness summary */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --fg:#1d2230; --muted:#5b6274; --line:#d9dce4;
+  --ch3:#a65d12; --ch3-soft:#f7ead9;
+  --ch4:#5b3f8c; --ch4-soft:#ece6f6;
+  --ch5:#2b5c9e; --ch5-soft:#e3ecf8;
+  --chx:#1f6f6a; --chx-soft:#dff1ef;
+  --r1:#b33a3a; --r2:#d27a3a; --r3:#c9a227; --r4:#5d9c6b; --r5:#1f7a55;
+  --focus:#2f6fd6;
+  --display:"Newsreader",Georgia,"Times New Roman",serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14161c; --surface:#1d2029; --fg:#e7e9ef; --muted:#a0a6b5; --line:#323645;
+  --ch3:#e3a35c; --ch3-soft:#3a2a17; --ch4:#b9a2e6; --ch4-soft:#2c2540; --ch5:#8fb6ef; --ch5-soft:#1c2a40; --chx:#6fcfc6; --chx-soft:#173533;
+  --r1:#ec8585; --r2:#eda36f; --r3:#e2c760; --r4:#8cc79a; --r5:#5cc79a; --focus:#7aa7ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14161c; --surface:#1d2029; --fg:#e7e9ef; --muted:#a0a6b5; --line:#323645;
+  --ch3:#e3a35c; --ch3-soft:#3a2a17; --ch4:#b9a2e6; --ch4-soft:#2c2540; --ch5:#8fb6ef; --ch5-soft:#1c2a40; --chx:#6fcfc6; --chx-soft:#173533;
+  --r1:#ec8585; --r2:#eda36f; --r3:#e2c760; --r4:#8cc79a; --r5:#5cc79a; --focus:#7aa7ff; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+main{max-width:820px;margin:0 auto;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.9rem,5vw,2.6rem)}
+h2{font-size:1.5rem}
+h3{font-size:1.12rem}
+p{margin:0;max-width:66ch}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.note{font-size:.88rem;color:var(--muted)}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.topbar-in{max-width:820px;margin:0 auto;display:flex;gap:10px 18px;align-items:center;flex-wrap:wrap;padding-block:10px}
+.topbar nav{display:flex;gap:6px;flex-wrap:wrap}
+.topbar nav a{font-size:.8rem;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:99px;color:var(--c);background:var(--cs)}
+.topbar nav a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.prog{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.prog .mini{width:90px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.prog .mini i{display:block;height:100%;width:0;background:var(--fg);transition:width .3s}
+
+header.intro{display:grid;gap:12px;padding-top:28px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:14px}
+.legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.legend div{display:grid;gap:4px;font-size:.78rem;line-height:1.3;color:var(--muted)}
+.legend b{display:grid;place-items:center;height:30px;border-radius:6px;font-size:.95rem;color:var(--surface);font-variant-numeric:tabular-nums}
+@media (max-width:520px){.legend{grid-template-columns:1fr}.legend div{grid-template-columns:30px 1fr;align-items:center;gap:10px}}
+
+section.chapter{display:grid;gap:14px}
+.ch-head{display:grid;gap:6px;border-top:4px solid var(--c);padding-top:14px}
+.ch-head .eyebrow{color:var(--c)}
+.ch-stats{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.group-label{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-top:6px}
+.list{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 14px;align-items:start;padding:14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+@media (max-width:640px){.row{grid-template-columns:auto minmax(0,1fr)}.row .rate{grid-column:1/-1}}
+.chk{appearance:none;width:20px;height:20px;border:2px solid var(--line);border-radius:5px;margin:3px 0 0;cursor:pointer;display:grid;place-items:center;background:var(--bg)}
+.chk:checked{background:var(--c);border-color:var(--c)}
+.chk:checked::after{content:"";width:5px;height:10px;border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.chk:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.txt{display:grid;gap:3px;min-width:0}
+.txt .name{font-weight:600}
+.txt .can{font-size:.9rem;color:var(--muted)}
+.txt .keys{font-size:.78rem;color:var(--c);font-weight:600}
+.rate{display:grid;gap:4px;justify-items:end}
+@media (max-width:640px){.rate{justify-items:start}}
+.seg{display:grid;grid-template-columns:repeat(5,38px);gap:4px;border:0;margin:0;padding:0}
+.seg legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{display:grid;place-items:center;height:34px;border:1px solid var(--line);border-radius:6px;cursor:pointer;font-weight:600;font-size:.9rem;background:var(--bg);font-variant-numeric:tabular-nums}
+.seg label:hover{border-color:var(--muted)}
+.seg input:focus-visible+label{outline:2px solid var(--focus);outline-offset:2px}
+.seg input:checked+label{color:var(--surface);border-color:transparent}
+.seg input[value="1"]:checked+label{background:var(--r1)}
+.seg input[value="2"]:checked+label{background:var(--r2)}
+.seg input[value="3"]:checked+label{background:var(--r3)}
+.seg input[value="4"]:checked+label{background:var(--r4)}
+.seg input[value="5"]:checked+label{background:var(--r5)}
+.rate .said{font-size:.74rem;color:var(--muted);min-height:1.2em}
+
+.reflect{display:grid;gap:14px}
+.reflect label{display:grid;gap:6px;font-weight:600;font-size:.93rem}
+.reflect label span.hint{font-weight:400;color:var(--muted);font-size:.85rem}
+textarea{font:inherit;font-size:.95rem;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);width:100%;min-height:76px;resize:vertical}
+textarea:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+
+.summary{display:grid;gap:22px}
+.sum-top{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;align-items:center}
+@media (max-width:520px){.sum-top{grid-template-columns:1fr}}
+.ring{width:150px;max-width:100%}
+.ring text{font-family:var(--display)}
+.band{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.verdict{display:grid;gap:8px}
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 110px;gap:12px;align-items:center;font-size:.9rem}
+@media (max-width:560px){.bar{grid-template-columns:minmax(0,1fr) 100px}.bar .track{grid-column:1/-1;grid-row:2}}
+.track{position:relative;height:16px;background:var(--bg);border:1px solid var(--line);border-radius:4px}
+.track .fill{position:absolute;inset:0 auto 0 0;border-radius:3px;transition:width .4s ease}
+.track .tick{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--line)}
+.track .goal{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--fg);opacity:.55}
+.bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bar .val b{color:var(--fg)}
+.axis{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 110px;gap:12px;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.axis .scale{position:relative;height:1em}
+.axis .scale span{position:absolute;transform:translateX(-50%)}
+@media (max-width:560px){.axis{grid-template-columns:1fr}.axis>span:first-child,.axis>span:last-child{display:none}}
+.dist{display:flex;height:22px;border-radius:5px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.dist i{display:block;height:100%;transition:width .4s ease}
+.dist-key{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.dist-key span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.plan{grid-template-columns:1fr}}
+.plan .col{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:8px;align-content:start;background:var(--bg)}
+.plan .col h4{margin:0;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
+.plan ul{margin:0;padding-left:1.1em;display:grid;gap:4px;font-size:.88rem}
+.plan li small{color:var(--muted)}
+.plan .empty{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button{font:inherit;font-weight:600;font-size:.92rem;padding:10px 18px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+button.primary{background:var(--fg);border-color:var(--fg);color:var(--surface)}
+button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <nav aria-label="Sections">
+      <a href="#ch3" style="--c:var(--ch3);--cs:var(--ch3-soft)">Ch 3</a>
+      <a href="#ch4" style="--c:var(--ch4);--cs:var(--ch4-soft)">Ch 4</a>
+      <a href="#ch5" style="--c:var(--ch5);--cs:var(--ch5-soft)">Ch 5</a>
+      <a href="#links" style="--c:var(--chx);--cs:var(--chx-soft)">Links</a>
+      <a href="#plan" style="--c:var(--fg);--cs:var(--bg)">My plan</a>
+      <a href="#summary" style="--c:var(--fg);--cs:var(--bg)">Summary</a>
+    </nav>
+    <div class="prog"><span id="progTxt">0 rated</span><span class="mini"><i id="progBar"></i></span></div>
+  </div>
+</div>
+
+<main>
+  <header class="intro">
+    <div class="eyebrow">PSY 385 Positive Psychology · Exam preparation</div>
+    <h1>Chapters 3–5 Exam Prep</h1>
+    <p>This checklist covers happiness and subjective wellbeing (Chapter 3), eudaimonic wellbeing (Chapter 4), and optimism, explanatory style and hope (Chapter 5). For each concept, tick the box when you have reviewed it. Then rate how well you know it from 1 to 5. Be honest: the summary at the end turns your ratings into a study plan.</p>
+    <p class="note">Your ratings and notes are saved in this browser only. Nobody else can see them.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="scaleH">
+    <h3 id="scaleH">How to rate yourself</h3>
+    <div class="legend">
+      <div><b style="background:var(--r1)">1</b>I don't know this yet</div>
+      <div><b style="background:var(--r2)">2</b>I recognise the term</div>
+      <div><b style="background:var(--r3)">3</b>I can define it</div>
+      <div><b style="background:var(--r4)">4</b>I can explain it with a study or example</div>
+      <div><b style="background:var(--r5)">5</b>I can apply it to a case and compare it with related ideas</div>
+    </div>
+    <p class="note">Aim for 4 or 5 on every concept before the exam. Essay questions need level 5.</p>
+  </section>
+
+  <div id="chapters" style="display:grid;gap:40px"></div>
+
+  <section class="chapter" id="plan" style="--c:var(--fg)">
+    <div class="ch-head">
+      <div class="eyebrow">Preparation reflection</div>
+      <h2>My study plan</h2>
+      <p class="note">Use Chapter 5 on yourself: set a clear goal (agency), plan more than one route (pathways), and dispute pessimistic thoughts (ABC).</p>
+    </div>
+    <div class="panel reflect" id="planBox"></div>
+  </section>
+
+  <section class="panel summary" id="summary" aria-live="polite">
+    <div class="eyebrow">Your results update as you rate</div>
+    <h2>My readiness</h2>
+    <div class="sum-top">
+      <svg class="ring" viewBox="0 0 150 150" role="img" aria-label="Overall readiness">
+        <circle cx="75" cy="75" r="62" fill="none" stroke="var(--line)" stroke-width="14"/>
+        <circle id="ringArc" cx="75" cy="75" r="62" fill="none" stroke="var(--muted)" stroke-width="14" stroke-linecap="round"
+          stroke-dasharray="0 390" transform="rotate(-90 75 75)" style="transition:stroke-dasharray .5s ease"/>
+        <text id="ringPct" x="75" y="80" text-anchor="middle" font-size="34" font-weight="600" fill="var(--fg)">–</text>
+        <text id="ringSub" x="75" y="102" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Public Sans, sans-serif">readiness</text>
+      </svg>
+      <div class="verdict">
+        <span class="band" id="band">Not started</span>
+        <h3 id="vTitle">Rate your first concept to see your profile</h3>
+        <p id="vText" class="note">Readiness is your average rating, shown as a percentage of the way from 1 (don't know) to 5 (can apply and compare).</p>
+      </div>
+    </div>
+
+    <div style="display:grid;gap:12px">
+      <h3>Average rating by section</h3>
+      <div class="bars" id="bars"></div>
+      <div class="axis"><span></span><span class="scale"><span style="left:0%">1</span><span style="left:25%">2</span><span style="left:50%">3</span><span style="left:75%">4</span><span style="left:100%">5</span></span><span></span></div>
+      <p class="note">The dark line marks 4, the target before the exam.</p>
+    </div>
+
+    <div style="display:grid;gap:10px">
+      <h3>How your ratings are spread</h3>
+      <div class="dist" id="dist" role="img" aria-label="Distribution of ratings"></div>
+      <div class="dist-key" id="distKey"></div>
+    </div>
+
+    <div style="display:grid;gap:12px">
+      <h3>What to study next</h3>
+      <div class="plan">
+        <div class="col"><h4 style="color:var(--r1)">Study first <span id="nA">0</span></h4><ul id="listA"></ul></div>
+        <div class="col"><h4 style="color:var(--r3)">Review <span id="nB">0</span></h4><ul id="listB"></ul></div>
+        <div class="col"><h4 style="color:var(--muted)">Not rated yet <span id="nC">0</span></h4><ul id="listC"></ul></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="primary" id="copy">Copy my study plan</button>
+      <button type="button" id="reset">Clear everything</button>
+      <span class="note" id="msg" role="status"></span>
+    </div>
+  </section>
+</main>
+
+<script>
+const SECTIONS=[
+ {id:"ch3",short:"Ch 3",eyebrow:"Chapter 3",title:"Happiness and Subjective Wellbeing across Nations",c:"ch3",
+  items:[
+   ["c3a","Subjective wellbeing (SWB)","Define SWB as life satisfaction + high positive affect + low negative affect; separate the cognitive and emotional parts.","Diener"],
+   ["c3b","Measuring SWB","Name the main tools (SWLS, Subjective Happiness Scale, PANAS, experience sampling) and give strengths and limits of self-report.","Diener; Lyubomirsky & Lepper"],
+   ["c3c","Global surveys and the ladder of life","Describe the Gallup World Poll and World Values Survey; explain thriving, struggling and suffering on the Cantril ladder.","Cantril; Gallup"],
+   ["c3d","Five ways to wellbeing and Gallup's five elements","List connect, be active, take notice, keep learning, give; and career, social, financial, physical, community wellbeing.","Foresight Report; Rath & Harter"],
+   ["c3e","The 40% solution and set point","Explain the 50% genetics / 10% circumstances / 40% intentional activity split and dynamic equilibrium theory.","Lyubomirsky; Headey & Wearing"],
+   ["c3f","Income and SWB","Explain why money matters most in poor nations, the Forbes rich list study, and diminishing returns.","Diener; Deaton"],
+   ["c3g","Relationships, marriage and children","Summarise findings on social time, the marriage 'honeymoon' effect and the curvilinear effect of children.","Kahneman (ESM); Fowler & Christakis"],
+   ["c3h","Work orientations","Distinguish job, career and calling orientations and how each links to wellbeing.","Diener & Biswas-Diener"],
+   ["c3i","Health, religion, age, gender, education","Describe the colds study and longevity findings, and what religion, age, gender and education add to SWB.","Cohen; Pressman"],
+   ["c3j","Hedonic adaptation","Explain the hedonic treadmill, the lottery winners study, and the HAP model (variety and surprise).","Brickman; Lyubomirsky"],
+   ["c3k","Affective forecasting","Explain impact bias, the tenure study, and natural versus synthetic happiness.","Gilbert"],
+   ["c3l","Discrepancy theories","Explain social comparison, the 'American paradox', materialism and 'affluenza'.","Myers; Diener & Oishi"],
+   ["c3m","The paradox of choice","Describe the jam study and compare maximizers with satisficers.","Schwartz; Iyengar & Lepper"],
+   ["c3n","Bottom-up, top-down and goal theories","Contrast bottom-up and top-down causes of SWB; explain why self-congruent goals matter.","Diener"],
+   ["c3o","AIM approach and the peak-end rule","Explain attention, interpretation, memory; name destructive thinking patterns; describe the colonoscopy study.","Diener & Biswas-Diener; Kahneman"]
+  ],
+  essays:[
+   ["e3a","Critically evaluate the research evidence on the correlates and predictors of subjective wellbeing."],
+   ["e3b","Critically evaluate the merits and shortcomings of SWB as a way of conceptualising and measuring happiness."],
+   ["e3c","Do we always return to our set point of happiness following positive or negative events?"]
+  ]},
+ {id:"ch4",short:"Ch 4",eyebrow:"Chapter 4",title:"Eudaimonic Wellbeing",c:"ch4",
+  items:[
+   ["c4a","Eudaimonia","Define eudaimonia as realising one's true nature (daimon) and trace it to Aristotle; link to values-congruent activity.","Aristotle; Waterman"],
+   ["c4b","Hedonic versus eudaimonic wellbeing","Explain why SWB and PWB are correlated but distinct, and the debate over how they relate.","Ryan & Deci; Keyes et al."],
+   ["c4c","Ryff's psychological wellbeing","Name and explain all six dimensions: self-acceptance, growth, purpose, relations, mastery, autonomy.","Ryff & Keyes"],
+   ["c4d","Authentic happiness: three routes","Explain the pleasant, engaged and meaningful life, and which are eudaimonic.","Seligman"],
+   ["c4e","Flow: definition and conditions","Define flow and list its conditions: clear goals, feedback, challenge–skill balance, concentration, control, time change.","Csikszentmihalyi"],
+   ["c4f","The challenge–skill model","Place activities in flow, anxiety, boredom and apathy (Figure 4.1).","Csikszentmihalyi"],
+   ["c4g","Who experiences flow; benefits and dangers","Explain the autotelic personality, experience sampling, where flow happens, and why flow can be harmful.","Nakamura & Csikszentmihalyi"],
+   ["c4h","Meaning and purpose in life","Explain why meaning matters for wellbeing; distinguish presence of meaning from search for meaning (MLQ).","Steger; Wong"],
+   ["c4i","Frankl and sources of meaning","Explain the will to meaning, creative, experiential and attitudinal values, and the seven sources of meaning.","Frankl"],
+   ["c4j","Self-determination theory","Explain autonomy, competence and relatedness and why they are basic needs.","Ryan & Deci"],
+   ["c4k","Existential positive psychology","Explain authentic, eudaimonic and chaironic happiness, and why contentment can leave a void.","Wong"],
+   ["c4l","Death, meaning management and terror management","Describe the three death attitudes, meaning management theory and mortality salience.","Wong; Pyszczynski et al."],
+   ["c4m","Integrating hedonic and eudaimonic wellbeing","Explain what each approach predicts and the open questions in combining them.","Huta; Waterman"]
+  ],
+  essays:[
+   ["e4a","Compare and contrast the concepts of subjective and psychological wellbeing."],
+   ["e4b","To what extent is it possible to arrive at a common definition of eudaimonic wellbeing?"],
+   ["e4c","'I would rather wake up unhappy than without meaning in my life.' Discuss."]
+  ]},
+ {id:"ch5",short:"Ch 5",eyebrow:"Chapter 5",title:"Optimism, Explanatory Style and Hope",c:"ch5",
+  items:[
+   ["c5a","History of optimism","Explain how optimism moved from being seen as naive denial to a resource for wellbeing.","Peterson"],
+   ["c5b","Dispositional optimism","Define it as a general expectancy of good outcomes; explain expectancy, confidence and the LOT-R.","Scheier & Carver"],
+   ["c5c","Explanatory style","Explain internal/external, stable/unstable, global/specific; know that stability and globality matter most; the ASQ.","Seligman"],
+   ["c5d","Trait versus learned optimism","Compare dispositional optimism (trait, future) with explanatory style (learned, causes of past events).","Scheier & Carver; Seligman"],
+   ["c5e","Learned optimism and the ABC model","Explain adversity, belief, consequence and how disputing beliefs works; link to learned helplessness.","Seligman"],
+   ["c5f","Benefits of optimism","Describe links with active coping, depression, health and the bypass surgery study.","Scheier et al.; Carver & Scheier"],
+   ["c5g","Positive illusions","Explain Taylor's positive illusions and when they may help.","Taylor & Brown"],
+   ["c5h","Locus of control and perceived control","Distinguish internal and external locus of control; describe the nursing home plant study.","Rotter; Langer & Rodin"],
+   ["c5i","Defensive pessimism","Explain how low expectations plus careful planning can help some people, and why changing them backfires.","Norem & Cantor"],
+   ["c5j","Unrealistic and flexible optimism","Explain optimistic bias in risk perception and the case for flexible optimism.","Peterson"],
+   ["c5k","Self-efficacy","Define self-efficacy, list its sources (mastery, vicarious, verbal persuasion, imaginal) and explain why it is domain-specific.","Bandura; Maddux"],
+   ["c5l","Social cognitive theory and collective efficacy","Explain triadic reciprocality, the Bobo doll studies and collective efficacy.","Bandura"],
+   ["c5m","Self-esteem","Define self-esteem, its types, the sociometer and terror management models, and the problem of unstable high self-esteem.","Rosenberg; Leary"],
+   ["c5n","Hope theory","Define hope as agency plus pathways, and explain how high-hope people use subgoals.","Snyder"],
+   ["c5o","Interventions","Describe the Best Possible Selves exercise and the sentence-completion exercise for self-esteem.","Sheldon & Lyubomirsky; Branden"]
+  ],
+  essays:[
+   ["e5a","Discuss the strengths and limitations of Snyder's cognitive formulation of hope."],
+   ["e5b","Is seeing a glass as half full always beneficial?"],
+   ["e5c","Compare and contrast the theories of dispositional optimism and explanatory style."]
+  ]},
+ {id:"links",short:"Links",eyebrow:"Across chapters",title:"Connecting the chapters",c:"chx",
+  items:[
+   ["x1","SWB (Ch 3) versus PWB (Ch 4)","Explain why someone can be satisfied with life but low in purpose and growth.","Keyes et al."],
+   ["x2","Hedonic adaptation (Ch 3) and meaning (Ch 4)","Explain why buying things fades quickly while meaningful pursuits last longer.","Brickman; Seligman"],
+   ["x3","Learned helplessness in Ch 3 and Ch 5","Explain learned helplessness as a destructive thinking pattern (AIM) and as the root of explanatory style.","Seligman"],
+   ["x4","Optimism (Ch 5) and SWB (Ch 3)","Explain how optimism and positive emotions are linked to health and wellbeing outcomes.","Carver & Scheier; Cohen"],
+   ["x5","Autonomy (Ch 4) and locus of control (Ch 5)","Compare self-determined behaviour with believing that outcomes depend on your own actions.","Ryan & Deci; Rotter"],
+   ["x6","Goals across all three chapters","Connect goal theories (Ch 3), purpose (Ch 4) and hope's agency and pathways (Ch 5).","Diener; Ryff; Snyder"]
+  ],essays:[]}
+];
+const REFLECT={
+ ch3:[["r3a","Explain Chapter 3's main idea in two sentences, in your own words.",""],["r3b","Which study from Chapter 3 could you describe in detail (who, what, result)?","e.g. lottery winners, jam study, Forbes list"],["r3c","Which two concepts do you mix up? How will you tell them apart?",""]],
+ ch4:[["r4a","Explain Chapter 4's main idea in two sentences, in your own words.",""],["r4b","Which study or model from Chapter 4 could you draw or describe from memory?","e.g. the flow channel, Ryff's six dimensions"],["r4c","Which two concepts do you mix up? How will you tell them apart?",""]],
+ ch5:[["r5a","Explain Chapter 5's main idea in two sentences, in your own words.",""],["r5b","Which study from Chapter 5 could you describe in detail?","e.g. bypass surgery, nursing home plants, insurance sales"],["r5c","Which two concepts do you mix up? How will you tell them apart?","e.g. self-efficacy and self-esteem"]],
+ links:[["rxa","Pick one person you know. Which concept from each chapter best describes them?",""]]
+};
+const PLAN=[
+ ["p1","My goal for this exam (agency)","What grade are you aiming for, and why does it matter to you?"],
+ ["p2","My three concepts to study first","Copy them from the summary below."],
+ ["p3","When and how long will I study?","e.g. Sun–Wed, 45 minutes after class"],
+ ["p4","Two different ways I will study (pathways)","e.g. explain concepts aloud to a friend; write answers to the mock essay questions"],
+ ["p5","What might get in the way, and what will I do then?","Plan a second route in advance."],
+ ["p6","A pessimistic thought I have about this exam, and how I dispute it (ABC)","Belief: “I always fail essays.” Dispute: is it really always? Is it everything?"]
+];
+const SAID={1:"I don't know this yet",2:"I recognise the term",3:"I can define it",4:"I can explain it",5:"I can apply and compare"};
+
+const KEY="psy385-prep-3-5-v1";
+let S={r:{},rev:{},t:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&s.r)S=Object.assign({r:{},rev:{},t:{}},s)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const seg=(id,label)=>`<fieldset class="seg"><legend>${esc(label)}</legend>${[1,2,3,4,5].map(v=>
+  `<input type="radio" name="${id}" id="${id}-${v}" value="${v}" data-rate="${id}"><label for="${id}-${v}" title="${v}: ${SAID[v]}">${v}</label>`).join("")}</fieldset>`;
+const row=(sec,[id,name,can,keys],withChk=true)=>`<div class="row">
+   ${withChk?`<input type="checkbox" class="chk" id="rev-${id}" data-rev="${id}" aria-label="Reviewed: ${esc(name)}">`:`<span></span>`}
+   <div class="txt"><span class="name">${esc(name)}</span>${can?`<span class="can">${esc(can)}</span>`:""}${keys?`<span class="keys">${esc(keys)}</span>`:""}</div>
+   <div class="rate">${seg(id,name)}<span class="said" id="said-${id}"></span></div></div>`;
+
+document.getElementById("chapters").innerHTML=SECTIONS.map(sec=>`
+ <section class="chapter" id="${sec.id}" style="--c:var(--${sec.c})">
+   <div class="ch-head"><div class="eyebrow">${esc(sec.eyebrow)}</div><h2>${esc(sec.title)}</h2>
+     <div class="ch-stats" id="stats-${sec.id}"></div></div>
+   <div class="group-label">${sec.id==="links"?"Can I connect these?":"Main constructs"}</div>
+   <div class="list">${sec.items.map(it=>row(sec,it)).join("")}</div>
+   ${sec.essays.length?`<div class="group-label">Essay readiness: could I write a good answer to this mock essay question?</div>
+   <div class="list">${sec.essays.map(([id,q])=>row(sec,[id,q,"",""],false)).join("")}</div>`:""}
+   <div class="group-label">Reflection</div>
+   <div class="panel reflect">${(REFLECT[sec.id]||[]).map(([id,q,h])=>`<label for="${id}">${esc(q)}${h?`<span class="hint">${esc(h)}</span>`:""}<textarea id="${id}" data-txt="${id}"></textarea></label>`).join("")}</div>
+ </section>`).join("");
+document.getElementById("planBox").innerHTML=PLAN.map(([id,q,h])=>`<label for="${id}">${esc(q)}<span class="hint">${esc(h)}</span><textarea id="${id}" data-txt="${id}"></textarea></label>`).join("");
+
+const ALL=[];SECTIONS.forEach(s=>{s.items.forEach(i=>ALL.push({id:i[0],name:i[1],sec:s,kind:"c"}));s.essays.forEach(e=>ALL.push({id:e[0],name:e[1],sec:s,kind:"e"}))});
+
+function restore(){
+  for(const [k,v] of Object.entries(S.r)){const el=document.getElementById(`${k}-${v}`);if(el)el.checked=true}
+  for(const [k,v] of Object.entries(S.rev)){const el=document.getElementById(`rev-${k}`);if(el)el.checked=!!v}
+  for(const [k,v] of Object.entries(S.t)){const el=document.getElementById(k);if(el)el.value=v}
+}
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.dataset.rate){S.r[t.dataset.rate]=+t.value;save();update()}
+  else if(t.dataset.rev){S.rev[t.dataset.rev]=t.checked;save();update()}
+});
+document.addEventListener("input",e=>{const t=e.target;if(t.dataset.txt){S.t[t.dataset.txt]=t.value;save()}});
+
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const toPct=a=>a==null?null:Math.round((a-1)/4*100);
+const col=v=>v>=4.5?"r5":v>=3.5?"r4":v>=2.5?"r3":v>=1.5?"r2":"r1";
+
+function update(){
+  ALL.forEach(x=>{const el=document.getElementById("said-"+x.id);if(el)el.textContent=S.r[x.id]?SAID[S.r[x.id]]:""});
+  const rated=ALL.filter(x=>S.r[x.id]);
+  document.getElementById("progTxt").textContent=`${rated.length} of ${ALL.length} rated`;
+  document.getElementById("progBar").style.width=(rated.length/ALL.length*100)+"%";
+
+  const rows=[];
+  SECTIONS.forEach(s=>{
+    const cs=ALL.filter(x=>x.sec===s&&x.kind==="c"), vals=cs.map(x=>S.r[x.id]).filter(Boolean);
+    const revN=cs.filter(x=>S.rev[x.id]).length, a=avg(vals);
+    document.getElementById("stats-"+s.id).innerHTML=`<span>Reviewed <b>${revN}/${cs.length}</b></span><span>Rated <b>${vals.length}/${cs.length}</b></span><span>Average <b>${a==null?"–":a.toFixed(1)}</b></span>`;
+    rows.push({name:{ch3:"Ch 3 · Subjective wellbeing",ch4:"Ch 4 · Eudaimonic wellbeing",ch5:"Ch 5 · Optimism and hope",links:"Connections across chapters"}[s.id],a,n:vals.length,N:cs.length,c:s.c});
+  });
+  const ess=ALL.filter(x=>x.kind==="e"), ev=ess.map(x=>S.r[x.id]).filter(Boolean);
+  rows.push({name:"Mock essay questions",a:avg(ev),n:ev.length,N:ess.length,c:"fg"});
+
+  document.getElementById("bars").innerHTML=rows.map(r=>`<div class="bar"><span>${esc(r.name)}</span>
+    <div class="track" role="img" aria-label="${esc(r.name)}: ${r.a==null?"not rated":r.a.toFixed(1)+" of 5"}">
+      ${[25,50,75].map(p=>`<span class="tick" style="left:${p}%"></span>`).join("")}
+      <div class="fill" style="width:${r.a==null?0:(r.a-1)/4*100}%;background:var(--${r.c==="fg"?"fg":r.c})"></div>
+      <span class="goal" style="left:75%"></span></div>
+    <span class="val">${r.a==null?"not rated":`<b>${r.a.toFixed(1)}</b> / 5`} · ${r.n}/${r.N}</span></div>`).join("");
+
+  const counts=[1,2,3,4,5].map(v=>rated.filter(x=>S.r[x.id]===v).length);
+  const tot=rated.length||1;
+  document.getElementById("dist").innerHTML=rated.length?counts.map((c,i)=>`<i style="width:${c/tot*100}%;background:var(--r${i+1})"></i>`).join(""):"";
+  document.getElementById("distKey").innerHTML=counts.map((c,i)=>`<span style="--c:var(--r${i+1})">${i+1}: ${c}</span>`).join("")+`<span style="--c:var(--line)">not rated: ${ALL.length-rated.length}</span>`;
+
+  const all=avg(rated.map(x=>S.r[x.id])), pct=toPct(all);
+  const C=2*Math.PI*62, arc=document.getElementById("ringArc");
+  arc.setAttribute("stroke-dasharray",`${pct==null?0:(pct/100*C).toFixed(1)} ${C.toFixed(1)}`);
+  arc.setAttribute("stroke",pct==null?"var(--muted)":`var(--${col(all)})`);
+  document.getElementById("ringPct").textContent=pct==null?"–":pct+"%";
+  const band=document.getElementById("band"),T=document.getElementById("vTitle"),P=document.getElementById("vText");
+  const low=rated.filter(x=>S.r[x.id]<=2).length;
+  if(pct==null){band.textContent="Not started";T.textContent="Rate your first concept to see your profile";P.textContent="Readiness is your average rating, shown as a percentage of the way from 1 (don't know) to 5 (can apply and compare)."}
+  else{
+    const share=rated.length/ALL.length;
+    let b,t,p;
+    if(all>=4.2){b="Exam ready";t="You know most concepts well";p="Keep it fresh: write timed answers to the mock essay questions and explain each concept aloud without notes."}
+    else if(all>=3.4){b="Nearly there";t="You can define most concepts";p="Push the 3s up to 4s: for each, learn one study and one real example. Then practise comparing related concepts."}
+    else if(all>=2.5){b="Building";t="You recognise the ideas but need depth";p="Start with the 'Study first' list. Re-read those sections, make one flashcard per concept, and test yourself the next day."}
+    else{b="Early stage";t="Most concepts are still new to you";p="Do not try everything at once. Pick three concepts a day from the 'Study first' list and rate yourself again tomorrow."}
+    if(share<1)p+=` You have rated ${rated.length} of ${ALL.length} items, so this picture is not complete yet.`;
+    if(low)p+=` ${low} item${low>1?"s are":" is"} at 1 or 2.`;
+    band.textContent=b;T.textContent=t;P.textContent=p;
+  }
+
+  const li=x=>`<li>${esc(x.name.length>70?x.name.slice(0,68)+"…":x.name)} <small>· ${esc(x.sec.short)}${S.r[x.id]?" · "+S.r[x.id]:""}</small></li>`;
+  const A=ALL.filter(x=>S.r[x.id]&&S.r[x.id]<=2).sort((a,b)=>S.r[a.id]-S.r[b.id]);
+  const B=ALL.filter(x=>S.r[x.id]===3);
+  const Cn=ALL.filter(x=>!S.r[x.id]);
+  const fill=(id,arr,empty,max=12)=>{document.getElementById(id).innerHTML=arr.length?arr.slice(0,max).map(li).join("")+(arr.length>max?`<li><small>and ${arr.length-max} more</small></li>`:""):`<li class="empty" style="list-style:none;margin-left:-1.1em">${empty}</li>`};
+  fill("listA",A,"Nothing rated 1 or 2.");fill("listB",B,"Nothing rated 3.");fill("listC",Cn,"Everything is rated.",8);
+  document.getElementById("nA").textContent=A.length;document.getElementById("nB").textContent=B.length;document.getElementById("nC").textContent=Cn.length;
+  return {A,B,Cn,pct,rows};
+}
+
+document.getElementById("copy").addEventListener("click",()=>{
+  const {A,B,Cn,pct,rows}=update();
+  const lines=["PSY 385 · Chapters 3–5 exam prep",`Readiness: ${pct==null?"not rated":pct+"%"}`,"",
+    ...rows.map(r=>`${r.name}: ${r.a==null?"not rated":r.a.toFixed(1)+"/5"} (${r.n}/${r.N} rated)`),"",
+    "Study first:",...(A.length?A.map(x=>`- ${x.name} (${x.sec.short}, rated ${S.r[x.id]})`):["- none"]),
+    "Review:",...(B.length?B.map(x=>`- ${x.name} (${x.sec.short})`):["- none"]),
+    ...(Cn.length?["Not rated yet: "+Cn.length+" items"]:[]),"",
+    ...PLAN.filter(([id])=>S.t[id]&&S.t[id].trim()).map(([id,q])=>`${q}: ${S.t[id].trim()}`)];
+  const txt=lines.join("\n"),msg=document.getElementById("msg");
+  navigator.clipboard.writeText(txt).then(()=>msg.textContent="Copied. Paste it into your notes.").catch(()=>{msg.textContent="Copy did not work in this view. Your plan is shown here: "+txt.replace(/\n+/g," | ")});
+});
+document.getElementById("reset").addEventListener("click",()=>{
+  const msg=document.getElementById("msg");
+  if(msg.dataset.c!=="1"){msg.textContent="Press “Clear everything” again to delete all ratings and notes.";msg.dataset.c="1";return}
+  msg.dataset.c="";S={r:{},rev:{},t:{}};save();
+  document.querySelectorAll("input[type=radio],input[type=checkbox]").forEach(i=>i.checked=false);
+  document.querySelectorAll("textarea").forEach(t=>t.value="");
+  update();msg.textContent="Cleared.";
+});
+restore();update();
+</script>
+
+</body></html>
