@@ -151,7 +151,51 @@ const DATA = {
    {q:"In Langer and Rodin’s (1976) study, residents who were given choices and a plant…",o:["Felt worse","Showed no change","Were more active and had lower mortality","Became more pessimistic"],a:2,why:"Mortality was 15% vs. 30% about 15 months later. A related study (Schulz & Hanusa, 1978) found that benefits faded when the sense of control was later taken away."},
    {q:"Self-efficacy is best described as…",o:["A fixed personality trait","Your overall self-worth","Belief that you can do a specific task","Your actual level of skill"],a:2,why:"“The power of I can”: domain-specific and not the same as skill or self-esteem."},
    {q:"In Snyder’s hope theory, “pathways” means…",o:["The will to keep going","Being able to find routes to your goals","Expecting good things in general","Explaining failure as temporary"],a:1,why:"Hope = agency (the will) + pathways (the ways)."},
-   {q:"Which intervention had the strongest effect on optimism in a 2017 meta-analysis?",o:["Positive affirmations","Best Possible Self","Watching comedy","Sleep training"],a:1,why:"Malouff and Schutte (2017) pooled 29 trials: optimism rose overall (g = .41), and Best Possible Self had the largest effects."}]}
+   {q:"Which intervention had the strongest effect on optimism in a 2017 meta-analysis?",o:["Positive affirmations","Best Possible Self","Watching comedy","Sleep training"],a:1,why:"Malouff and Schutte (2017) pooled 29 trials: optimism rose overall (g = .41), and Best Possible Self had the largest effects."}]},
+ // ---------------- CHAPTER 6 ----------------
+ stress:{day:6,kind:"Poll",title:"Warm-up poll: stress and you",sub:"Two quick questions before we start",type:"poll",items:[
+   {q:"Which of these stresses you most this semester?",o:["Exams and deadlines","Family expectations","Money or work","Health or sleep","My future and career"],
+    after:"Most of these are everyday stressors. A trauma is different: an event that threatens your life or safety, or someone else’s. Today we look at how people respond to both."},
+   {q:"When something goes wrong, what do you usually do first?",o:["Make a plan and fix it","Talk to someone I trust","Distract myself (games, phone, sleep)","Pray, reflect or look for meaning"],
+    after:"These match the coping styles we study today: problem-focused, social support, avoidance and meaning-focused coping. Remember your answer."}]},
+ brs:{day:6,kind:"Questionnaire",title:"Brief Resilience Scale",sub:"BRS · 6 items · 1 minute",type:"scale",
+  intro:"How much do you agree with each statement? Answer for yourself. Your answers stay on your phone.",
+  labels:["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"],values:[1,2,3,4,5],
+  items:["I tend to bounce back quickly after hard times.","I have a hard time making it through stressful events.","It does not take me long to recover from a stressful event.","It is hard for me to snap back when something bad happens.","I usually come through difficult times with little trouble.","I tend to take a long time to get over set-backs in my life."],
+  score(a){const r=v=>6-v;const s=(a[0]+r(a[1])+a[2]+r(a[3])+a[4]+r(a[5]))/6;const m=Math.round(s*100)/100;
+   const band=m<3?"low":m<=4.3?"normal":"high";
+   return {main:m.toFixed(2),max:5,label:"Resilience score (1–5)",
+    text:`Your score is in the ${band} range (low 1.00–2.99 · normal 3.00–4.30 · high 4.31–5.00). The BRS measures one thing: how quickly you feel you bounce back.`,
+    detail:"Scoring: items 2, 4 and 6 are reversed (6 minus your answer); the score is the average of all six. Source: Smith et al. (2008). Resilience can be built: see the ABCDE activity."}}},
+ coping:{day:6,kind:"Quick check",title:"Which coping strategy is it?",sub:"Coping styles · 5 scenarios",type:"quiz",intro:"Each student is under stress. Which coping strategy is he using?",
+  items:[
+   {q:"Yousef has three exams next week. He makes a study timetable and books a meeting with his instructor.",o:["Problem-focused","Emotion-focused","Avoidance","Meaning-focused"],a:0,why:"He acts on the problem itself: planning and getting information."},
+   {q:"Bader is waiting for his grades and cannot change them. He goes for a run to calm down.",o:["Problem-focused","Emotion-focused","Avoidance","Meaning-focused"],a:1,why:"He manages his feelings. When a situation cannot be changed, emotion-focused coping is a good fit."},
+   {q:"Faisal has a group project problem. He plays games all night and turns off his phone.",o:["Problem-focused","Emotion-focused","Avoidance","Meaning-focused"],a:2,why:"He escapes the problem. Avoidance can help for a short time, but usually makes stress worse later."},
+   {q:"After his father’s illness, Hamad says, “This taught me how much my family means to me.”",o:["Problem-focused","Emotion-focused","Avoidance","Meaning-focused"],a:3,why:"He draws on values and finds meaning in a hard event (Folkman’s meaning-focused coping)."},
+   {q:"Abdullah fails his driving test. He asks the examiner what went wrong and practises those parts.",o:["Problem-focused","Emotion-focused","Avoidance","Meaning-focused"],a:0,why:"He targets the cause of the problem with a plan."}]},
+ ptg:{day:6,kind:"Quick check",title:"The five domains of growth",sub:"Post-traumatic growth · 5 statements",type:"quiz",intro:"Each person went through a hard event. Which domain of post-traumatic growth does his statement show?",
+  items:[
+   {q:"Mubarak, after a car accident: “I notice small things now: breakfast with my kids, the sunset.”",o:["Relating to others","New possibilities","Personal strength","Spiritual change","Appreciation of life"],a:4,why:"A changed sense of what matters, and greater appreciation of each day."},
+   {q:"Saud, after losing his job: “I started the small business I always talked about.”",o:["Relating to others","New possibilities","Personal strength","Spiritual change","Appreciation of life"],a:1,why:"New paths and opportunities that were not there before."},
+   {q:"Khaled, after cancer treatment: “If I got through that, I can handle anything.”",o:["Relating to others","New possibilities","Personal strength","Spiritual change","Appreciation of life"],a:2,why:"A greater sense of personal strength: vulnerable, yet stronger."},
+   {q:"Nasser, after his brother’s death: “My faith is deeper and I pray with more meaning.”",o:["Relating to others","New possibilities","Personal strength","Spiritual change","Appreciation of life"],a:3,why:"Spiritual or existential change."},
+   {q:"Ahmad, after a house fire: “I learned who my real friends are, and I am closer to my family.”",o:["Relating to others","New possibilities","Personal strength","Spiritual change","Appreciation of life"],a:0,why:"Closer, more meaningful relationships and more compassion for others."}]},
+ ageing:{day:6,kind:"Quick check",title:"Ageing: myth or fact?",sub:"5 statements · what does research say?",type:"quiz",
+  items:[
+   {q:"Most older adults are lonely and unhappy.",o:["Myth","Fact"],a:0,why:"Many older adults report stable or higher well-being: the “paradox of ageing”."},
+   {q:"In many countries, life satisfaction follows a U-shape: lowest in middle age, higher later.",o:["Myth","Fact"],a:1,why:"Blanchflower (2021) found a U-shape in 145 countries, with the low point around the late 40s."},
+   {q:"How you think about ageing can affect how long you live.",o:["Myth","Fact"],a:1,why:"Levy et al. (2002): people with positive views of ageing lived about 7.5 years longer."},
+   {q:"Healthy ageing is mostly decided by your genes, so lifestyle hardly matters.",o:["Myth","Fact"],a:0,why:"Vaillant’s Grant Study: factors under our control (not smoking, exercise, healthy weight, education, relationships) predicted healthy ageing."},
+   {q:"Older adults tend to remember positive information better than negative information.",o:["Myth","Fact"],a:1,why:"The positivity effect (Carstensen): as time feels shorter, people focus on emotionally meaningful goals."}]},
+ quiz6:{day:6,kind:"Quiz",title:"Chapter 6 exit quiz",sub:"6 questions · instant feedback",type:"quiz",
+  items:[
+   {q:"After a potentially traumatic event, the most common pattern is…",o:["Chronic distress","Delayed PTSD","Resilience: stable, healthy functioning","Post-traumatic growth"],a:2,why:"Galatzer-Levy et al. (2018): about two thirds of people (65.7%) show a resilient trajectory."},
+   {q:"Lepore and Revenson’s “reconfiguration” means…",o:["Low distress during the event","Returning to normal","Changing as a result of the trauma","Avoiding the problem"],a:2,why:"Recovery = back to normal; resistance = low distress; reconfiguration = change after trauma."},
+   {q:"Talking to your boss and making a plan to improve is…",o:["Emotion-focused coping","Problem-focused coping","Avoidance","Succumbing"],a:1,why:"It targets the problem itself (Lazarus & Folkman)."},
+   {q:"Which is NOT one of the five PTG domains?",o:["Appreciation of life","Personal strength","Higher income","New possibilities"],a:2,why:"The domains: relating to others, new possibilities, personal strength, spiritual change, appreciation of life."},
+   {q:"In the ABCDE method, “D” stands for…",o:["Depression","Disputation","Distraction","Denial"],a:1,why:"Disputation: arguing back against the pessimistic belief."},
+   {q:"Selection, Optimisation and Compensation (SOC) is a strategy for…",o:["Positive ageing","Measuring trauma","Diagnosing PTSD","Avoiding stress"],a:0,why:"Baltes and Baltes (1990): focus on key goals, build on strengths, adapt around losses."}]}
 };
 
 const app=document.getElementById('app');
@@ -166,9 +210,11 @@ function home(){
   <section class="day"><h3>Chapter 4 · Eudaimonic wellbeing</h3>${day(0)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 5 · Optimism, Explanatory Style and Hope</p>
   <section class="day"><h3>Day 1 · Optimism and explanatory style</h3>${day(1)}</section>
-  <section class="day"><h3>Day 2 · Control, the three selves and hope</h3>${day(2)}</section>`;
+  <section class="day"><h3>Day 2 · Control, the three selves and hope</h3>${day(2)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 6 · Resilience, Post-Traumatic Growth and Positive Ageing</p>
+  <section class="day"><h3>Day 1 · Resilience, coping, growth and ageing</h3>${day(6)}</section>`;
 }
-function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.day?"Chapter 5 · Day "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
+function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.day===6?"Chapter 6":v.day?"Chapter 5 · Day "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
 
 function poll(k,v){
   const saved=store.get('p_'+k)||{};
