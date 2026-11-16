@@ -252,7 +252,47 @@ const DATA = {
    {q:"Omar says: “Why plan? Whatever happens will happen anyway.” Which time perspective is this?",o:["Future","Past-positive","Present-fatalistic","Present-hedonistic"],a:2,why:"A hopeless belief that outside forces control your life is present-fatalistic."},
    {q:"Ahmad parties the night before every exam because “it’s more fun now”. Which time perspective is he showing?",o:["Present-hedonistic","Future","Past-negative","Balanced"],a:0,why:"Choosing pleasure now with little thought for consequences is present-hedonistic."},
    {q:"Talal keeps replaying a mistake he made two years ago. Which perspective is this?",o:["Past-positive","Past-negative","Future","Present-hedonistic"],a:1,why:"Focusing on bad or painful past experiences is past-negative."},
-   {q:"Which student shows a balanced time perspective?",o:["Saud never relaxes and only thinks about future success","Faisal plans his studies, enjoys weekends with friends and values family memories","Bader lives only for today","Khaled mostly thinks about past mistakes"],a:1,why:"A balanced perspective moves flexibly between past, present and future, as the situation needs."}]}
+   {q:"Which student shows a balanced time perspective?",o:["Saud never relaxes and only thinks about future success","Faisal plans his studies, enjoys weekends with friends and values family memories","Bader lives only for today","Khaled mostly thinks about past mistakes"],a:1,why:"A balanced perspective moves flexibly between past, present and future, as the situation needs."}]},
+ // ---------------- CHAPTER 8 ----------------
+ mind8:{day:8,chap:"Chapter 8",kind:"Poll",title:"Warm-up: what do you believe about ability?",sub:"Two quick questions",type:"poll",items:[
+   {q:"“Your intelligence is something you can’t change very much.” How much do you agree?",o:["Strongly agree","Agree","Not sure","Disagree","Strongly disagree"],
+    after:"Agreeing points toward a fixed mindset (ability is carved in stone). Disagreeing points toward a growth mindset (ability can be developed). Most people hold a mix of both."},
+   {q:"You get a low grade on your first quiz in a new course. What is your FIRST thought?",o:["“I’m just not good at this subject.”","“The teacher is unfair.”","“I need a different way to study.”","“I’ll ask for help and try again.”"],
+    after:"The first answer is fixed-mindset thinking. The last two are growth-mindset thinking: they treat the grade as information about strategy, not about who you are."}]},
+ praise8:{day:8,chap:"Chapter 8",kind:"Quick check",title:"Growth or fixed?",sub:"Praise and self-talk · 5 scenarios",type:"quiz",intro:"Choose the response that builds a growth mindset.",
+  items:[
+   {q:"Yousef’s little brother solves a hard puzzle. What should Yousef say?",o:["“You’re so smart!”","“You kept trying different ways until it worked.”","“That was easy for you.”","“You’re a natural.”"],a:1,why:"Praising effort and strategy (the process) builds persistence. Praising intelligence teaches that ability is fixed."},
+   {q:"Bader fails his first coding assignment. Which thought shows a growth mindset?",o:["“I’m not a computer person.”","“Coding is only for geniuses.”","“I haven’t learned this YET. What can I practise?”","“I’ll avoid coding courses.”"],a:2,why:"“Not yet” treats ability as something that develops with practice."},
+   {q:"A manager tells Faisal: “Great result. Which approach worked best, and what would you change next time?” This feedback…",o:["Focuses on talent","Focuses on the process and learning","Is a fixed-mindset message","Is only about the outcome"],a:1,why:"Asking about strategies and next steps keeps attention on learning, not on proving ability."},
+   {q:"Hamad avoids the advanced math class “so I don’t look stupid”. His goal is mainly…",o:["A learning goal","A performance goal: looking smart","A growth goal","A social goal"],a:1,why:"Avoiding challenge to protect your image is a performance (fixed-mindset) goal."},
+   {q:"Abdullah tells his friend, “Just try harder!” after the same failed method three times. What is missing?",o:["Nothing: effort is all that matters","A new strategy and help from others","More praise for intelligence","Lower expectations"],a:1,why:"Growth mindset is not effort alone. It means effort plus new strategies and asking for help."}]},
+ grit8:{day:8,chap:"Chapter 8",kind:"Questionnaire",title:"How gritty are you?",sub:"Perseverance and passion · 8 items",type:"scale",
+  intro:"How much is each statement like you? Your answers stay on your phone.",
+  labels:["Not like me at all","Not much like me","Somewhat like me","Mostly like me","Very much like me"],values:[1,2,3,4,5],
+  items:["I finish whatever I begin.","Setbacks don’t discourage me for long.","I keep working hard even when progress is slow.","I have reached a goal that took years of work.","New ideas and projects often distract me from older ones.","I often set a goal but later choose a different one.","I lose interest in projects after a few weeks.","My interests change from year to year."],
+  score(a){const r=v=>6-v;const P=(a[0]+a[1]+a[2]+a[3])/4,I=(r(a[4])+r(a[5])+r(a[6])+r(a[7]))/4;const f=x=>x.toFixed(1);
+   return {main:f((P+I)/2),max:5,label:"Your grit score (1–5)",
+    text:`Perseverance of effort ${f(P)} · Consistency of interest ${f(I)}. Research suggests the perseverance part matters more for performance than the consistency part.`,
+    detail:"Items 5–8 are reversed (6 minus your answer). A short classroom check inspired by the grit scale, not the official one. The official scale is at angeladuckworth.com/grit-scale."}}},
+ stage8:{day:8,chap:"Chapter 8",kind:"Poll",title:"Which stage of change are you in?",sub:"One habit · two questions",type:"poll",
+  intro:"Pick ONE habit you would like to change: sleep, exercise, phone use, food, or study routine.",items:[
+   {q:"Which stage are you in for that habit?",o:["Not thinking about changing it yet","Thinking about it, but not ready","Planning to start in the next month","I started changing it recently","I changed it more than 6 months ago"],
+    after:"These are the five stages: pre-contemplation, contemplation, preparation, action and maintenance. Slipping back is normal: most people cycle through the stages more than once."},
+   {q:"What usually stops you from changing?",o:["I forget","Not enough time","I lose motivation","People around me","I don’t know how to start"],
+    after:"Each obstacle has a different fix: reminders and if-then plans, smaller steps, a reason that is truly yours, support from others, or a clear first step."}]},
+ ppi8:{day:8,chap:"Chapter 8",kind:"Poll",title:"Find your best-fit activity",sub:"Person–activity fit · two questions",type:"poll",items:[
+   {q:"Which positive activity would you most like to try this week?",o:["Three good things (write them each night)","A gratitude letter or visit","Savouring a good moment","Best possible self (write about your future)","Acts of kindness","Using a strength in a new way","Exercise or sport","Calm breathing or mindfulness"],
+    after:"Activities work best when they feel natural to you, fit your strengths and fit your lifestyle. Variety also helps: change the activity or the way you do it now and then."},
+   {q:"Which one would feel most FORCED or unnatural for you?",o:["Three good things","Gratitude letter or visit","Savouring","Best possible self","Acts of kindness","Using a strength in a new way","Exercise or sport","Calm breathing or mindfulness"],
+    after:"An activity that feels forced is less likely to help, even if it works well for others. That is person–activity fit."}]},
+ quiz8:{day:8,chap:"Chapter 8",kind:"Quiz",title:"Chapter 8 exit quiz",sub:"6 scenarios · instant feedback",type:"quiz",
+  items:[
+   {q:"Talal says, “I’m bad at presentations, so there’s no point practising.” This is an example of…",o:["A growth mindset","A fixed mindset","Grit","Savouring"],a:1,why:"Believing ability can’t change, so effort is pointless, is fixed-mindset thinking."},
+   {q:"Saud’s father praises him: “You worked on that essay every day this week. It shows!” What will this most likely build?",o:["Fear of failure","Belief that effort and strategy lead to progress","Belief that he is naturally gifted","Less motivation"],a:1,why:"Process praise focuses on effort and strategy, which supports a growth mindset."},
+   {q:"Nasser has trained for a marathon for two years, through injuries and bad weather. He is showing…",o:["Grit: perseverance and passion for a long-term goal","A performance goal","Present-hedonistic time perspective","Avoidance"],a:0,why:"Sticking with a long-term goal despite setbacks is grit."},
+   {q:"Khaled knows he sleeps too little and plans to fix his routine next month. Which stage of change is he in?",o:["Pre-contemplation","Preparation","Action","Maintenance"],a:1,why:"Intending to act soon and making a plan is the preparation stage."},
+   {q:"Mubarak quit sugary drinks for three weeks, then had one at a party. What is the best way to see this?",o:["He has failed completely","Slipping back is a normal part of change; he can continue","He should give up","Change is impossible"],a:1,why:"Relapse is common in the change cycle. It is information, not the end."},
+   {q:"Ahmad tried a gratitude journal but found it forced and boring. What should he do?",o:["Force himself to continue","Try a different activity that fits him better","Stop all positive activities","Write longer entries"],a:1,why:"Person–activity fit: activities that feel natural and fit your strengths work best."}]}
 };
 
 const app=document.getElementById('app');
@@ -272,7 +312,9 @@ function home(){
   <section class="day"><h3>Day 1 · Resilience, coping, growth and ageing</h3>${day(6)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 7 · Values, Motivation and Goal Theories</p>
   <section class="day"><h3>Part 1 · Goals and motivation</h3>${day(71)}</section>
-  <section class="day"><h3>Part 2 · Values and time</h3>${day(72)}</section>`;
+  <section class="day"><h3>Part 2 · Values and time</h3>${day(72)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 8 · Positive Psychological Interventions</p>
+  <section class="day"><h3>One session · Mindsets, grit, change and positive activities</h3>${day(8)}</section>`;
 }
 function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.chap?v.chap:v.day===6?"Chapter 6":v.day?"Chapter 5 · Day "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
 
