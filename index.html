@@ -195,7 +195,64 @@ const DATA = {
    {q:"Talking to your boss and making a plan to improve is…",o:["Emotion-focused coping","Problem-focused coping","Avoidance","Succumbing"],a:1,why:"It targets the problem itself (Lazarus & Folkman)."},
    {q:"Which is NOT one of the five PTG domains?",o:["Appreciation of life","Personal strength","Higher income","New possibilities"],a:2,why:"The domains: relating to others, new possibilities, personal strength, spiritual change, appreciation of life."},
    {q:"In the ABCDE method, “D” stands for…",o:["Depression","Disputation","Distraction","Denial"],a:1,why:"Disputation: arguing back against the pessimistic belief."},
-   {q:"Selection, Optimisation and Compensation (SOC) is a strategy for…",o:["Positive ageing","Measuring trauma","Diagnosing PTSD","Avoiding stress"],a:0,why:"Baltes and Baltes (1990): focus on key goals, build on strengths, adapt around losses."}]}
+   {q:"Selection, Optimisation and Compensation (SOC) is a strategy for…",o:["Positive ageing","Measuring trauma","Diagnosing PTSD","Avoiding stress"],a:0,why:"Baltes and Baltes (1990): focus on key goals, build on strengths, adapt around losses."}]},
+ // ---------------- CHAPTER 7 ----------------
+ goals7:{day:71,chap:"Chapter 7 · Part 1",kind:"Poll",title:"Your goal for this year",sub:"Two questions · what and why",type:"poll",items:[
+   {q:"What is your most important goal for this year?",o:["Good grades / graduating","A good job or career start","Earning money","Health and fitness","Family and friendships","Looking good / being admired","Helping others or my community"],
+    after:"Researchers sort goals into intrinsic (growth, relationships, health, community) and extrinsic (money, image, fame). Intrinsic goals tend to bring more lasting well-being. Grades and careers can be either: it depends on WHY you chase them."},
+   {q:"Why are you pursuing this goal?",o:["I enjoy it or find it interesting","It is truly important to me","I would feel guilty or ashamed if I didn’t","Others expect it, or I want a reward","Honestly, I’m not sure"],
+    after:"These five answers sit on a line from controlled to autonomous motivation. “I enjoy it” and “It matters to me” are the most autonomous, and they predict more effort, persistence and well-being."}]},
+ needs7:{day:71,chap:"Chapter 7 · Part 1",kind:"Questionnaire",title:"Are your needs being met?",sub:"Autonomy · competence · relatedness · 9 items",type:"scale",
+  intro:"Think about your life at university this semester. How true is each statement for you? Your answers stay on your phone.",
+  labels:["Not at all true","Slightly true","Somewhat true","Mostly true","Completely true"],values:[1,2,3,4,5],
+  items:["I feel free to make my own choices about my studies.","I often feel pressured to do things I don’t want to do.","What I do at university reflects what I really want.","I feel capable in my courses.","I often feel like I am failing at my studies.","I am learning new skills and can see my progress.","I feel connected to people at university.","I often feel alone or left out.","People here care about me."],
+  score(a){const r=v=>6-v;const A=(a[0]+r(a[1])+a[2])/3,C=(a[3]+r(a[4])+a[5])/3,R=(a[6]+r(a[7])+a[8])/3;
+   const f=x=>x.toFixed(1);const all=(A+C+R)/3;const n=[["autonomy",A,"choose one task this week that you do in your own way, for your own reasons"],["competence",C,"break a hard task into small steps and notice each one you finish"],["relatedness",R,"join a study group or club, or message a classmate you’d like to know"]].sort((x,y)=>x[1]-y[1]);
+   return {main:f(all),max:5,label:"Overall need satisfaction (1–5)",
+    text:`Autonomy ${f(A)} · Competence ${f(C)} · Relatedness ${f(R)}. Your lowest need right now is ${n[0][0]}. One idea: ${n[0][2]}.`,
+    detail:"Items 2, 5 and 8 are reversed (6 minus your answer). Each need score is the average of its three items. A short classroom check, not an official scale."}}},
+ goaltypes7:{day:71,chap:"Chapter 7 · Part 1",kind:"Quick check",title:"Which goal will make him happier?",sub:"Goals that aid happiness · 5 scenarios",type:"quiz",intro:"Each student is choosing between two goals. Which goal is more likely to support his well-being?",
+  items:[
+   {q:"Yousef is choosing a goal for the gym.",o:["“Get stronger and feel more energetic”","“Look better than my friends in photos”"],a:0,why:"An intrinsic goal (health, growth) supports well-being more than an image goal."},
+   {q:"Bader wants to change how he speaks in class.",o:["“Stop embarrassing myself when I talk”","“Share one idea in every class”"],a:1,why:"An approach goal (moving toward something) beats an avoidance goal (moving away from something you fear)."},
+   {q:"Faisal’s goals: top grades AND working 30 hours a week AND football every evening.",o:["Keep all three as they are","Adjust them so they fit together"],a:1,why:"Goals that conflict pull against each other. Harmonious goals support each other."},
+   {q:"Hamad chose engineering because his father wants it, but he loves design.",o:["Find a way to connect the goal to his own values","Push on and ignore how he feels"],a:0,why:"Goals that fit your values (self-concordant goals) bring more effort and satisfaction."},
+   {q:"Abdullah wants to be happier this semester.",o:["“Buy the new phone everyone has”","“Join the volunteering club”"],a:1,why:"Activity goals (new experiences, clubs, helping) last longer than buying things, which we quickly get used to."}]},
+ quiz7a:{day:71,chap:"Chapter 7 · Part 1",kind:"Quiz",title:"Part 1 exit quiz",sub:"6 scenarios · instant feedback",type:"quiz",
+  items:[
+   {q:"Talal studies psychology because he finds people fascinating. His motivation is mostly…",o:["Controlled by others","Autonomous: from his own interest","Driven by guilt","Absent"],a:1,why:"Doing something out of interest is intrinsic, the most autonomous form of motivation."},
+   {q:"Saud studies hard only so his parents won’t be angry. What is the likely long-term effect?",o:["Stronger interest in the subject","Less enjoyment and persistence than studying for himself","No effect on motivation","He will become more creative"],a:1,why:"Controlled motivation (pressure, fear of punishment) is linked to less persistence and lower well-being."},
+   {q:"A manager lets her team choose how to finish a project and explains why it matters. She is supporting their…",o:["Competence only","Autonomy","Relatedness only","Fear of failure"],a:1,why:"Offering choice and a meaningful reason supports autonomy."},
+   {q:"Nasser has been chasing a goal for three years with no progress, and it makes him miserable. What helps most?",o:["Never give up on any goal","Let it go and commit to a new, reachable goal","Blame himself until he succeeds","Stop setting goals"],a:1,why:"Being able to let go of an unreachable goal and re-engage with a new one supports well-being."},
+   {q:"Which goal is most likely to make Khaled happier in the long run?",o:["Becoming famous on social media","Owning an expensive car","Building close friendships","Being seen as the best-looking"],a:2,why:"Relationship goals are intrinsic. Goals about fame, money and image predict lower well-being."},
+   {q:"Mubarak’s new job pays well, but he feels lonely and has no say in his work. Which needs are not being met?",o:["Competence and income","Relatedness and autonomy","None: the pay is enough","Only competence"],a:1,why:"Feeling lonely = relatedness; no say in his work = autonomy. Money does not meet psychological needs."}]},
+ values7:{day:72,chap:"Chapter 7 · Part 2",kind:"Poll",title:"What do you value most?",sub:"Ten values · two questions",type:"poll",items:[
+   {q:"Which value guides your life the MOST?",o:["Power: status, control, resources","Achievement: success, being competent","Pleasure: enjoying life","Stimulation: excitement, new things","Self-direction: independence, my own ideas","Universalism: fairness, tolerance, nature","Benevolence: caring for family and friends","Tradition: religion, customs, heritage","Conformity: following rules, respecting others","Security: safety, stability, order"],
+    after:"Values next to each other in the circle fit together (for example, benevolence and universalism). Values on opposite sides pull against each other (for example, power and universalism)."},
+   {q:"Which value matters LEAST to you right now?",o:["Power","Achievement","Pleasure","Stimulation","Self-direction","Universalism","Benevolence","Tradition","Conformity","Security"],
+    after:"There are no right answers. Well-being comes from living in line with YOUR values, whatever they are."}]},
+ tp7:{day:72,chap:"Chapter 7 · Part 2",kind:"Questionnaire",title:"What is your time perspective?",sub:"Past · present · future · 10 items",type:"scale",
+  intro:"How true is each statement for you? Your answers stay on your phone.",
+  labels:["Very untrue","Untrue","Neutral","True","Very true"],values:[1,2,3,4,5],
+  items:["I make plans and lists so I meet my deadlines.","When I have work to do, I resist temptations and fun.","I often do things on impulse, just for the fun of it.","I enjoy taking risks to make life exciting.","Planning is pointless, because things never turn out as planned.","My life is mostly controlled by things I cannot change.","I enjoy family stories and memories of the good old days.","Happy memories of the past come easily to me.","I often think about bad things that happened to me.","I keep thinking about what I should have done differently."],
+  score(a){const m=(i)=>(a[i]+a[i+1])/2;const T=[["Future",m(0)],["Present-hedonistic",m(2)],["Present-fatalistic",m(4)],["Past-positive",m(6)],["Past-negative",m(8)]];
+   const top=[...T].sort((x,y)=>y[1]-x[1])[0];
+   return {main:top[1].toFixed(1),max:5,label:"Strongest: "+top[0]+" (1–5)",
+    text:T.map(t=>t[0]+" "+t[1].toFixed(1)).join(" · ")+".",
+    detail:"A balanced profile: high past-positive; fairly high future and present-hedonistic; low past-negative and present-fatalistic. A short classroom check based on the five time perspectives, not the official questionnaire."}}},
+ time7:{day:72,chap:"Chapter 7 · Part 2",kind:"Poll",title:"Where does your time go?",sub:"Two quick questions",type:"poll",items:[
+   {q:"On a normal day, how many hours do you spend on your phone (not for study)?",o:["Less than 2","2 to 4","4 to 6","More than 6","I don’t know"],
+    after:"Check your phone’s Screen Time to see the real number. Most people guess low."},
+   {q:"If you had one extra free hour every day, how would you use it?",o:["Sleep and rest","Family and friends","Exercise or sport","Study or career","A hobby or learning something new","More time on my phone"],
+    after:"Compare your answer with how you actually spend time now. The gap shows where your time and your values do not match."}]},
+ quiz7b:{day:72,chap:"Chapter 7 · Part 2",kind:"Quiz",title:"Part 2 exit quiz",sub:"6 scenarios · instant feedback",type:"quiz",
+  items:[
+   {q:"Waleed values family above everything but works 70 hours a week for a bonus. Why might he feel unhappy?",o:["His goals don’t match his values","Bonuses always make people unhappy","He values family too much","He needs a bigger bonus"],a:0,why:"Satisfaction comes from goals and activities that fit our values."},
+   {q:"Jasem wants a powerful, high-status career and also to spend his life helping refugees. What might he feel?",o:["No conflict at all","Tension between values on opposite sides of the circle","Only boredom","Only pride"],a:1,why:"Power (self-enhancement) and universalism (self-transcendence) sit opposite each other, so they often conflict."},
+   {q:"Omar says: “Why plan? Whatever happens will happen anyway.” Which time perspective is this?",o:["Future","Past-positive","Present-fatalistic","Present-hedonistic"],a:2,why:"A hopeless belief that outside forces control your life is present-fatalistic."},
+   {q:"Ahmad parties the night before every exam because “it’s more fun now”. Which time perspective is he showing?",o:["Present-hedonistic","Future","Past-negative","Balanced"],a:0,why:"Choosing pleasure now with little thought for consequences is present-hedonistic."},
+   {q:"Talal keeps replaying a mistake he made two years ago. Which perspective is this?",o:["Past-positive","Past-negative","Future","Present-hedonistic"],a:1,why:"Focusing on bad or painful past experiences is past-negative."},
+   {q:"Which student shows a balanced time perspective?",o:["Saud never relaxes and only thinks about future success","Faisal plans his studies, enjoys weekends with friends and values family memories","Bader lives only for today","Khaled mostly thinks about past mistakes"],a:1,why:"A balanced perspective moves flexibly between past, present and future, as the situation needs."}]}
 };
 
 const app=document.getElementById('app');
@@ -212,9 +269,12 @@ function home(){
   <section class="day"><h3>Day 1 · Optimism and explanatory style</h3>${day(1)}</section>
   <section class="day"><h3>Day 2 · Control, the three selves and hope</h3>${day(2)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 6 · Resilience, Post-Traumatic Growth and Positive Ageing</p>
-  <section class="day"><h3>Day 1 · Resilience, coping, growth and ageing</h3>${day(6)}</section>`;
+  <section class="day"><h3>Day 1 · Resilience, coping, growth and ageing</h3>${day(6)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 7 · Values, Motivation and Goal Theories</p>
+  <section class="day"><h3>Part 1 · Goals and motivation</h3>${day(71)}</section>
+  <section class="day"><h3>Part 2 · Values and time</h3>${day(72)}</section>`;
 }
-function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.day===6?"Chapter 6":v.day?"Chapter 5 · Day "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
+function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.chap?v.chap:v.day===6?"Chapter 6":v.day?"Chapter 5 · Day "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
 
 function poll(k,v){
   const saved=store.get('p_'+k)||{};
