@@ -61,12 +61,41 @@ label.f small{font-weight:400;color:var(--muted)}
 .note{font-size:.85rem;color:var(--muted)}
 .progress{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:no-preference){.opt,.scale button{transition:background .15s,border-color .15s}}
+
+/* ---- live class results (projector view) ---- */
+body.live .wrap{max-width:1180px}
+body.live{font-size:20px}
+.lv-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.lv-join{display:flex;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 16px}
+.lv-join img,.lv-join canvas{width:132px;height:132px}
+.lv-join p{margin:0;font-size:15px;color:var(--muted)}.lv-join b{display:block;font-size:17px;color:var(--ink)}
+.lv-count{font-family:var(--display);font-size:56px;line-height:1;color:var(--teal);font-weight:700}
+.lv-q{font-family:var(--display);font-size:26px;line-height:1.25;margin:2px 0 10px}
+.lv-row{display:grid;grid-template-columns:minmax(180px,34%) 1fr 92px;gap:14px;align-items:center;margin:4px 0}
+.lv-lab{font-weight:600;font-size:18px;line-height:1.25}
+.lv-track{height:32px;border-radius:10px;background:var(--teal-soft);overflow:hidden}
+.lv-fill{height:100%;width:0;border-radius:10px;background:var(--teal);transition:width .6s ease}
+.lv-row.ok .lv-fill{background:var(--good)}.lv-row.ok .lv-lab::after{content:"  ✓";color:var(--good)}
+.lv-row.dim .lv-fill{background:var(--line)}
+.lv-n{font-variant-numeric:tabular-nums;text-align:right;font-weight:700;font-size:22px}.lv-n small{display:inline;margin-left:6px;font-weight:400;font-size:14px;color:var(--muted)}
+.lv-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.lv-bar button{font:inherit;font-size:16px;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.lv-bar button.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.lv-dots{display:flex;gap:8px;flex-wrap:wrap}.lv-dots button{min-width:56px}
+.lv-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.lv-sum div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:15px}
+.lv-sum b{display:block;font-size:26px;color:var(--teal)}
+.lv-live{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.lv-live i{width:10px;height:10px;border-radius:50%;background:var(--good);animation:lvp 1.6s infinite}
+@keyframes lvp{0%,100%{opacity:1}50%{opacity:.25}}
+@media (max-width:700px){.lv-row{grid-template-columns:1fr 70px}.lv-track{grid-column:1/-1;order:3}.lv-q{font-size:24px}}
 </style>
 
 </head>
 <body>
 <div class="wrap" id="app"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const DATA = {
  home:{},
@@ -448,6 +477,9 @@ const DATA = {
    {q:"Across 75 countries, which strengths did people most often say were like them?",o:["Self-regulation and modesty","Honesty, fairness and kindness","Leadership and bravery","Prudence and spirituality"],a:1,why:"Honesty, fairness, kindness, judgement and curiosity were most endorsed, with strong similarity across nations."},
    {q:"After recovering from a serious illness, Khaled notices more gratitude and appreciation of beauty. This suggests…",o:["Strengths never change","Strengths can change with life experiences","He was wrong about his strengths before","Illness only harms strengths"],a:1,why:"Strengths can shift over time and after major events such as illness or tragedy."},
    {q:"Which strengths are most strongly linked to life satisfaction?",o:["Hope, zest, gratitude, love and curiosity","Prudence and humility","Leadership and teamwork","Creativity and judgement"],a:0,why:"These ‘heart’ strengths have the strongest links with life satisfaction."}]},
+ virtue10:{day:101,chap:"Chapter 10 · Part 1",kind:"Poll",title:"Our signature strengths",sub:"One tap · live class results",type:"poll",items:[
+   {q:"Which virtue did MOST of your top 5 strengths belong to?",o:["Wisdom","Courage","Humanity","Justice","Temperance","Transcendence"],
+    after:"Look at the screen: the class results are building live. Wisdom and transcendence contain the most strengths (5 each), so they often come out on top."}]},
  apply10:{day:102,chap:"Chapter 10 · Part 2",kind:"Poll",title:"Warm-up: where should we apply it?",sub:"Two quick questions",type:"poll",items:[
    {q:"Where would positive psychology make the BIGGEST difference in Kuwait?",o:["Schools","Universities","Workplaces","Hospitals and clinics","Families and parenting","Government policy"],
     after:"Today we look at four areas of application: therapy, coaching, education and organisations, plus public policy."},
@@ -487,6 +519,47 @@ const app=document.getElementById('app');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
+// ---- live class results: each answer is also sent, anonymously, to the instructor's Google Sheet ----
+const LIVE="https://script.google.com/macros/s/AKfycbxHhtaASTQQY8flOhLDtkRgiM0M3z_XO7CO7q6D3TXkMo_-Z2NQeggMcJqkH55vb_-F7A/exec";
+function sid(){let x=store.get('sid');if(!x){x=Math.random().toString(36).slice(2,12);store.set('sid',x)}return x}
+function send(k,i,j){if(!LIVE)return;try{fetch(LIVE,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({a:k,q:i,o:j,s:sid()})}).catch(()=>{})}catch(e){}}
+let liveTick=null;
+function liveView(k,v){
+  document.body.classList.add('live');
+  const isQuiz=v.type==='quiz',N=v.items.length,join=location.origin+location.pathname+'#'+k;
+  let cur=0,reveal=false,data={n:0,q:{}};
+  const since=()=>store.get('since_'+k)||0;
+  app.innerHTML=`<button class="back" data-go="">← All activities</button>
+   <div class="lv-top"><div><p class="eyebrow">${esc(v.chap||'')} · Live class results</p><h2>${esc(v.title)}</h2>
+     <div class="lv-bar"><span class="lv-count" id="lvn">0</span><span>responses<br><span class="lv-live"><i></i>updating live</span></span></div></div>
+     <div class="lv-join"><div id="lvqr"></div><div><b>Scan to join</b><p>${esc(join.replace(/^https?:\/\//,''))}</p><p>No sign-in · anonymous</p></div></div></div>
+   <div class="card" id="lvcard"></div>
+   <div class="lv-bar">${N>1?`<div class="lv-dots">${v.items.map((_,i)=>`<button data-q="${i}">Q${i+1}</button>`).join('')}</div>`:''}
+     ${isQuiz?'<button id="lvrev">Show correct answer</button>':''}<button id="lvnew" title="Count only answers from now on">New class session</button></div>
+   ${isQuiz?'<div class="lv-sum" id="lvsum"></div>':''}
+   ${LIVE?'':'<p class="note">Live results are not connected yet.</p>'}`;
+  try{new QRCode(document.getElementById('lvqr'),{text:join,width:132,height:132,colorDark:'#0F3D3E',colorLight:'#ffffff'})}catch(e){}
+  const draw=()=>{
+    document.getElementById('lvn').textContent=data.n||0;
+    const it=v.items[cur],c=(data.q&&data.q[cur])||{},tot=Object.values(c).reduce((a,b)=>a+b,0);
+    document.getElementById('lvcard').innerHTML=`<p class="progress">${N>1?`Question ${cur+1} of ${N} · `:''}${tot} answered</p><p class="lv-q">${esc(it.q)}</p>`+
+      it.o.map((o,j)=>{const n=c[j]||0,p=tot?Math.round(n*100/tot):0,cls=isQuiz&&reveal?(j===it.a?' ok':' dim'):'';
+        return `<div class="lv-row${cls}"><span class="lv-lab">${isQuiz?String.fromCharCode(65+j)+'. ':''}${esc(o)}</span><div class="lv-track"><div class="lv-fill" style="width:${p}%"></div></div><span class="lv-n">${p}%<small>${n}</small></span></div>`}).join('')+
+      (isQuiz&&reveal?`<p class="fb">${esc(it.why)}</p>`:'');
+    app.querySelectorAll('.lv-dots button').forEach(b=>b.classList.toggle('on',+b.dataset.q===cur));
+    if(isQuiz){document.getElementById('lvsum').innerHTML=v.items.map((q,i)=>{const cc=(data.q&&data.q[i])||{},t=Object.values(cc).reduce((a,b)=>a+b,0);
+      return `<div><b>${t?Math.round((cc[q.a]||0)*100/t):0}%</b>Q${i+1} correct</div>`}).join('');
+      document.getElementById('lvrev').textContent=reveal?'Hide answer':'Show correct answer';}
+  };
+  const pull=()=>{if(!LIVE)return draw();fetch(LIVE+'?a='+encodeURIComponent(k)+'&since='+since()+'&t='+Date.now()).then(r=>r.json()).then(d=>{data=d;draw()}).catch(()=>{})};
+  app.querySelectorAll('.lv-dots button').forEach(b=>b.onclick=()=>{cur=+b.dataset.q;reveal=false;draw()});
+  if(isQuiz)document.getElementById('lvrev').onclick=()=>{reveal=!reveal;draw()};
+  document.getElementById('lvnew').onclick=()=>{if(confirmNew()){store.set('since_'+k,Date.now());data={n:0,q:{}};draw();pull()}};
+  draw();pull();liveTick=setInterval(pull,3000);
+}
+function confirmNew(){const b=document.getElementById('lvnew');if(b.dataset.arm){delete b.dataset.arm;b.textContent='New class session';return true}
+  b.dataset.arm=1;b.textContent='Click again to clear the screen';setTimeout(()=>{if(b.dataset.arm){delete b.dataset.arm;b.textContent='New class session'}},4000);return false}
+
 function home(){
   const day=n=>Object.entries(DATA).filter(([k,v])=>k!=='home'&&v.day===n).map(([k,v])=>
     `<a class="tile" href="#${k}" data-go="${k}"><span class="k">${v.kind}</span><span><b>${esc(v.title)}</b><span class="s">${esc(v.sub)}</span></span></a>`).join('');
@@ -524,8 +597,8 @@ function poll(k,v){
   app.innerHTML=header(v)+v.items.map((it,i)=>`<div class="card"><p class="q">${esc(it.q)}</p><div class="opts">${it.o.map((o,j)=>
     `<button class="opt" data-i="${i}" data-j="${j}" aria-pressed="${saved[i]===j}">${esc(o)}</button>`).join('')}</div>
     <p class="fb" id="pf${i}" ${saved[i]===undefined?'hidden':''}>${esc(it.after)}</p></div>`).join('')+
-    `<p class="note">Your instructor will ask for a show of hands, so remember your answer.</p>`;
-  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,j=+b.dataset.j;saved[i]=j;store.set('p_'+k,saved);
+    `<p class="note">${LIVE?"Your answer is added anonymously to the class results on screen. You can change it.":"Your instructor will ask for a show of hands, so remember your answer."}</p>`;
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,j=+b.dataset.j;saved[i]=j;store.set('p_'+k,saved);send(k,i,j);
     app.querySelectorAll(`.opt[data-i="${i}"]`).forEach(x=>x.setAttribute('aria-pressed',x===b));document.getElementById('pf'+i).hidden=false;});
 }
 function quiz(k,v){
@@ -535,7 +608,7 @@ function quiz(k,v){
    `<div class="result" id="qres" hidden></div>`;
   app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,j=+b.dataset.j,it=v.items[i];
     const group=app.querySelectorAll(`.opt[data-i="${i}"]`);if(group[0].disabled)return;
-    group.forEach((x,n)=>{x.disabled=true;if(n===it.a)x.classList.add('right');});
+    group.forEach((x,n)=>{x.disabled=true;if(n===it.a)x.classList.add('right');});send(k,i,j);
     if(j!==it.a)b.classList.add('wrong');else right++;done++;
     const f=document.getElementById('qf'+i);f.hidden=false;f.textContent=(j===it.a?'Correct. ':'Not quite. ')+it.why;
     if(done===v.items.length){const r=document.getElementById('qres');r.hidden=false;
@@ -586,14 +659,16 @@ function bps(k,v){
 }
 function route(){
   if(tick){clearInterval(tick);tick=null}
+  if(liveTick){clearInterval(liveTick);liveTick=null}document.body.classList.remove('live');
   const k=(location.hash||'').slice(1);const v=DATA[k];
-  if(!v||k==='home'){home();}
+  if(k.startsWith('live-')&&DATA[k.slice(5)]){liveView(k.slice(5),DATA[k.slice(5)]);}
+  else if(!v||k==='home'){home();}
   else ({poll,quiz,scale,abc,bps})[v.type](k,v);
   app.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const g=b.dataset.go;
     try{history.replaceState(null,'',g?'#'+g:location.pathname)}catch(x){} show(g)}));
   window.scrollTo(0,0);
 }
-function show(g){const v=DATA[g];if(tick){clearInterval(tick);tick=null}
+function show(g){const v=DATA[g];if(tick){clearInterval(tick);tick=null}if(liveTick){clearInterval(liveTick);liveTick=null}document.body.classList.remove('live');
   if(!v||g==='home')home();else ({poll,quiz,scale,abc,bps})[v.type](g,v);
   app.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const n=b.dataset.go;try{history.replaceState(null,'',n?'#'+n:location.pathname)}catch(x){} show(n)}));
   window.scrollTo(0,0);}
