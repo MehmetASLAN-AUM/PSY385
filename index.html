@@ -70,6 +70,97 @@ label.f small{font-weight:400;color:var(--muted)}
 <script>
 const DATA = {
  home:{},
+ // ---------------- INTRODUCTION ----------------
+ hello:{day:10,chap:"Course introduction",kind:"Poll",title:"Warm-up: why this course?",sub:"Two quick questions",type:"poll",items:[
+   {q:"Why did you choose PSY385 Positive Psychology?",o:["The topic sounds interesting","I want to feel happier or less stressed","It may help my future career","A friend recommended it","It fitted my schedule"],
+    after:"The textbook opens with this same question. Whatever brought you here, every chapter links the research to your own life."},
+   {q:"Which question would you most like this course to answer?",o:["What makes people truly happy?","How can I handle stress and setbacks?","How do I find my strengths?","How do I stay motivated?","How can I build better relationships?"],
+    after:"All five are covered: happiness (Ch. 3–4), resilience (Ch. 6), strengths (Ch. 10), motivation (Ch. 7) and relationships throughout."}]},
+ // ---------------- CHAPTER 1 ----------------
+ why1:{day:11,chap:"Chapter 1",kind:"Poll",title:"Warm-up: what is psychology about?",sub:"Two quick questions",type:"poll",items:[
+   {q:"When you hear the word “psychology”, what do you think of first?",o:["Mental illness and therapy","How the brain works","Understanding behaviour and personality","Happiness and wellbeing","Reading people’s minds"],
+    after:"For most of the 20th century, psychology focused mainly on mental illness. Positive psychology adds the study of what goes right."},
+   {q:"Is a person with no mental illness automatically mentally healthy?",o:["Yes","No","Not sure"],
+    after:"No. Research shows mental health and mental illness are two separate continua: you can be free of illness and still be languishing."}]},
+ flour1:{day:11,chap:"Chapter 1",kind:"Questionnaire",title:"The Flourishing Scale",sub:"8 items · 2 minutes · Diener et al. (2010)",type:"scale",
+  intro:"How much do you agree with each statement? Your answers stay on your phone.",
+  labels:["Strongly disagree","Disagree","Slightly disagree","Neither","Slightly agree","Agree","Strongly agree"],values:[1,2,3,4,5,6,7],
+  items:["I lead a purposeful and meaningful life.","My social relationships are supportive and rewarding.","I am engaged and interested in my daily activities.","I actively contribute to the happiness and wellbeing of others.","I am competent and capable in the activities that are important to me.","I am a good person and live a good life.","I am optimistic about my future.","People respect me."],
+  score(a){const t=a.reduce((x,y)=>x+y,0);const lo=a.map((v,i)=>[v,i]).sort((x,y)=>x[0]-y[0])[0][1];
+   const L=["meaning and purpose","supportive relationships","engagement","contributing to others","competence","being a good person","optimism","feeling respected"];
+   const v=t>=48?"You describe yourself as flourishing in most areas of life.":t>=40?"You are doing well in many areas, with room to grow in some.":t>=32?"Some areas of your life feel strong and others less so.":"Several areas feel difficult right now. Talking to someone you trust, or to a university counsellor, can help.";
+   return {main:t,max:56,label:"Flourishing score (8–56)",text:v+" Your lowest item was "+L[lo]+": a good place to start.",
+    detail:"Add the eight answers (1–7 each). Higher scores mean more psychological resources and strengths. There are no official cut-offs; the bands here are only a guide. Source: Diener et al. (2010)."}}},
+ model1:{day:11,chap:"Chapter 1",kind:"Quick check",title:"Which psychology is it?",sub:"Disease model or positive psychology · 5 scenarios",type:"quiz",intro:"Is each example closer to ‘psychology as usual’ (fixing what is wrong) or positive psychology (building what is right)?",
+  items:[
+   {q:"A study asks why some students fail their first year at university.",o:["Psychology as usual","Positive psychology"],a:0,why:"‘Why do people fail?’ is the classic deficit question."},
+   {q:"A study asks what helps some students thrive in their first year, even under pressure.",o:["Psychology as usual","Positive psychology"],a:1,why:"‘What makes people succeed?’ is the positive psychology question."},
+   {q:"A clinic helps Yousef move from severe to mild depression.",o:["Psychology as usual","Positive psychology"],a:0,why:"Moving from −8 towards 0 is the disease (medical) model. It is important work, but only half the picture."},
+   {q:"A workshop helps Faisal, who is not ill but feels ‘flat’, find more energy and meaning.",o:["Psychology as usual","Positive psychology"],a:1,why:"Moving someone from languishing towards flourishing (0 to +8) is the focus of positive psychology."},
+   {q:"Researchers test whether daily gratitude letters raise wellbeing in a randomised trial.",o:["Psychology as usual","Positive psychology"],a:1,why:"Positive psychology studies wellbeing with the scientific method. It is not self-help."}]},
+ quiz1c:{day:11,chap:"Chapter 1",kind:"Quiz",title:"Chapter 1 exit quiz",sub:"6 scenarios · instant feedback",type:"quiz",
+  items:[
+   {q:"Hamad says positive psychology is just ‘think positive and smile’. What is the best reply?",o:["He is right","It is the scientific study of what helps people and communities thrive","It only studies happy people","It replaces therapy"],a:1,why:"Positive psychology uses research to study wellbeing, strengths and flourishing, not slogans."},
+   {q:"Talal has no mental illness but feels empty and unmotivated. Keyes would describe him as…",o:["Flourishing","Languishing","Mentally ill","Perfectly healthy"],a:1,why:"Mental health and mental illness are separate continua. No illness does not mean flourishing."},
+   {q:"A researcher studies kindness and teamwork in a company. Which ‘node’ of positive psychology is this?",o:["Subjective node","Individual node","Group node","Future node"],a:2,why:"The group node studies positive institutions and communities, such as altruism and work ethic."},
+   {q:"Bader is absorbed in coding for hours and loses track of time. Which of Seligman’s ‘lives’ is this?",o:["The pleasant life","The engaged life","The meaningful life","The comfortable life"],a:1,why:"Flow and absorption belong to the engaged life."},
+   {q:"Which group was studying ‘the good life’ long before positive psychology?",o:["Only modern economists","Aristotle, the utilitarians, William James and the humanistic psychologists","Nobody before 1998","Only medical doctors"],a:1,why:"The textbook names four historical roots: the Greeks, utilitarianism, William James and humanistic psychology."},
+   {q:"What is the main criticism humanistic psychologists make of positive psychology?",o:["It is too qualitative","It separated itself and relied almost only on numbers (quantitative methods)","It ignores happiness","It has no research"],a:1,why:"Humanists argue positive psychology left out qualitative methods and their ‘cousins’ in its push to look scientific."}]},
+ // ---------------- CHAPTER 2 · PART 1 ----------------
+ emo2:{day:21,chap:"Chapter 2 · Part 1",kind:"Poll",title:"Warm-up: your emotions this week",sub:"Two quick questions",type:"poll",items:[
+   {q:"Which positive emotion did you feel MOST this week?",o:["Joy","Gratitude","Serenity (calm)","Interest","Hope","Pride","Amusement","Love"],
+    after:"These are from Fredrickson’s ‘top ten’ positive emotions. Today we see what they do for us."},
+   {q:"When you feel really good, what usually happens to your thinking?",o:["I get more creative and open","I focus on one thing","I get lazy","Nothing changes"],
+    after:"Broaden-and-build theory predicts the first answer: positive emotions widen attention and thinking."}]},
+ spane2:{day:21,chap:"Chapter 2 · Part 1",kind:"Questionnaire",title:"SPANE: positive and negative experience",sub:"12 feelings · 2 minutes · Diener et al. (2009)",type:"scale",
+  intro:"Think about the past four weeks. How often did you feel each of the following? Your answers stay on your phone.",
+  labels:["Very rarely or never","Rarely","Sometimes","Often","Very often or always"],values:[1,2,3,4,5],
+  items:["Positive","Negative","Good","Bad","Pleasant","Unpleasant","Happy","Sad","Afraid","Joyful","Angry","Contented"],
+  score(a){const P=a[0]+a[2]+a[4]+a[6]+a[9]+a[11],N=a[1]+a[3]+a[5]+a[7]+a[8]+a[10],B=P-N;
+   const v=B>=10?"Positive feelings clearly outweigh negative ones for you this month.":B>0?"You felt somewhat more positive than negative this month.":B===0?"Your positive and negative feelings were balanced this month.":"Negative feelings outweighed positive ones this month. Notice what might help, and talk to someone you trust if it continues.";
+   return {main:(B>0?"+":"")+B,max:24,label:"Affect balance (SPANE-B, −24 to +24)",text:`Positive (SPANE-P): ${P} of 30 · Negative (SPANE-N): ${N} of 30. ${v}`,
+    detail:"SPANE-P adds positive, good, pleasant, happy, joyful and contented. SPANE-N adds negative, bad, unpleasant, sad, afraid and angry. Balance = P minus N. Source: Diener et al. (2009)."}}},
+ em2:{day:21,chap:"Chapter 2 · Part 1",kind:"Quick check",title:"Emotion, mood or broaden-and-build?",sub:"5 everyday scenarios",type:"quiz",intro:"Read each scenario and pick the best answer.",
+  items:[
+   {q:"Omar has felt vaguely low all week but cannot say why.",o:["Emotion","Mood"],a:1,why:"No clear trigger and long-lasting: a mood."},
+   {q:"Yousef’s heart races when his name is called to present.",o:["Emotion","Mood"],a:0,why:"A clear trigger and a brief burst of arousal: an emotion."},
+   {q:"After a funny video, Khaled finds three new ideas for his group project.",o:["Broadening","Building","Undoing","Narrowing"],a:0,why:"Positive emotion widened his thinking in the moment: broadening."},
+   {q:"After a stressful exam, Fahad laughs with friends and his heart rate calms down faster.",o:["Broadening","Building","Undoing","Narrowing"],a:2,why:"Positive emotions help the body recover from stress faster: the undoing effect."},
+   {q:"Over a semester of weekly football with classmates, Saud gains close friends he can rely on.",o:["Broadening","Building","Undoing","Narrowing"],a:1,why:"Repeated positive emotions build lasting resources, such as social support."}]},
+ quiz2a:{day:21,chap:"Chapter 2 · Part 1",kind:"Quiz",title:"Part 1 exit quiz",sub:"6 scenarios · instant feedback",type:"quiz",
+  items:[
+   {q:"Why does a single rude comment often stay with Nasser longer than five compliments?",o:["He is too sensitive","The negativity bias: bad is stronger than good","Compliments are not real","Moods last longer than emotions"],a:1,why:"Our ancestors survived by noticing threats, so negative events tend to hit harder."},
+   {q:"Ali’s coach says, “You must stay positive 100% of the time.” What does newer research suggest?",o:["The coach is right","Accepting negative emotions, not forcing positivity, predicts better wellbeing","Negative emotions should be hidden","Positivity has no benefits"],a:1,why:"Forced cheerfulness can backfire; accepting difficult emotions is linked to better mental health."},
+   {q:"What happened to the famous 3:1 positivity ratio?",o:["It was proven exactly","Its mathematical model was withdrawn; ‘more positive than negative’ still helps","It became 10:1","It only applies to companies"],a:1,why:"The maths was shown to be invalid in 2013. There is no magic number, but positivity still matters."},
+   {q:"Talal feels a rush of vastness looking at the desert sky at night. Which emotion is this?",o:["Pride","Awe","Amusement","Serenity"],a:1,why:"Awe is the feeling of being in the presence of something vast that we cannot fully grasp."},
+   {q:"Which statement about ‘basic emotions’ fits newer research best?",o:["There are exactly six emotions","There may be many more than six, and the brain builds emotions from body and context","Emotions have nothing to do with the body","Only negative emotions are basic"],a:1,why:"Studies now map 27 or more kinds of emotion, and constructionist views see emotions as built by the brain."},
+   {q:"Mubarak wants to grow his positive emotions this week. Which plan fits the research?",o:["Wait for something good to happen","Notice one top-ten emotion daily and what triggers it","Avoid all negative feelings","Watch more short videos"],a:1,why:"Fredrickson’s positivity portfolio asks people to notice and deliberately cultivate their positive emotions."}]},
+ // ---------------- CHAPTER 2 · PART 2 ----------------
+ meter2:{day:22,chap:"Chapter 2 · Part 2",kind:"Poll",title:"Mood Meter check-in",sub:"Two quick questions",type:"poll",items:[
+   {q:"Right now, which box are you in?",o:["High energy · unpleasant (stressed, anxious)","High energy · pleasant (excited, proud)","Low energy · unpleasant (tired, bored)","Low energy · pleasant (calm, content)"],
+    after:"The two dimensions are pleasantness and energy: the circumplex model of affect (Russell, 1980)."},
+   {q:"Which word describes your feeling most precisely?",o:["Fine / OK","Tired","Stressed","Bored","Curious","Calm","Excited","Grateful"],
+    after:"“Fine” tells us little. Naming feelings precisely (emotional granularity) helps people manage them better."}]},
+ ei2:{day:22,chap:"Chapter 2 · Part 2",kind:"Quick check",title:"EI in action: which branch?",sub:"The four-branch ability model · 5 scenarios",type:"quiz",intro:"Which branch of emotional intelligence is each student using?",
+  items:[
+   {q:"Nasser notices that Bader has gone quiet in their design meeting.",o:["Perceiving","Using","Understanding","Managing"],a:0,why:"Noticing how others feel is perceiving emotion."},
+   {q:"Talal plays upbeat music before brainstorming, then calms down to check the budget.",o:["Perceiving","Using","Understanding","Managing"],a:1,why:"Choosing a mood that helps the task is using emotion to think."},
+   {q:"Ali realises his ‘anger’ actually started as embarrassment.",o:["Perceiving","Using","Understanding","Managing"],a:2,why:"Tracing how one emotion turns into another is understanding emotion."},
+   {q:"Mohammad waits until after class to raise an unfair comment calmly.",o:["Perceiving","Using","Understanding","Managing"],a:3,why:"Regulating when and how to express a feeling is managing emotion."},
+   {q:"Which EI model uses tests with right and wrong answers?",o:["Ability model","Mixed model","Trait model","Big Five"],a:0,why:"The ability model (Mayer, Salovey and Caruso) uses performance tests such as the MSCEIT 2."}]},
+ ai2:{day:22,chap:"Chapter 2 · Part 2",kind:"Poll",title:"Debate: can AI have emotional intelligence?",sub:"One statement, two questions",type:"poll",items:[
+   {q:"“If an AI scores higher than humans on an EI test, it is emotionally intelligent.”",o:["Strongly agree","Agree","Not sure","Disagree","Strongly disagree"],
+    after:"In 2025, six AI chatbots averaged 81% on EI tests, against 56% for humans. Knowing the right answer is not the same as feeling or managing emotions."},
+   {q:"Would you ask an AI chatbot for advice about a personal problem?",o:["Yes, often","Sometimes","Only for small things","Never"],
+    after:"Think about what AI can and cannot know about you, your family and your context."}]},
+ quiz2b:{day:22,chap:"Chapter 2 · Part 2",kind:"Quiz",title:"Part 2 exit quiz",sub:"6 scenarios · instant feedback",type:"quiz",
+  items:[
+   {q:"Abdullah and Hamad both score 75 on the midterm. Abdullah got 55 on the quiz; Hamad got 92. Who probably feels better?",o:["Hamad","Abdullah","Both the same","Neither"],a:1,why:"We feel good when progress is faster than expected. The rate of progress matters most."},
+   {q:"Khaled says, “Dopamine is the pleasure chemical.” What is more accurate?",o:["He is right","Dopamine is mainly about wanting and motivation","Dopamine causes fear","Dopamine stores memories"],a:1,why:"Dopamine drives wanting; pleasure itself relies on small opioid ‘hotspots’."},
+   {q:"Which kind of positive feeling protects most against depression, anxiety and stress?",o:["Excited and activated","Safe and content","Proud","Amused"],a:1,why:"Feeling safe, warm and connected was the strongest protector."},
+   {q:"Yaqoub scores high on a self-report EI questionnaire. What is the main caution?",o:["Self-report EI overlaps with personality and can be faked","It proves he is a genius","Self-reports are always accurate","EI cannot be measured at all"],a:0,why:"Trait (self-report) EI overlaps strongly with the Big Five and is open to faking good."},
+   {q:"How strongly does EI predict academic performance?",o:["Not at all","Modestly, even beyond IQ and personality","More than IQ does","Perfectly"],a:1,why:"Meta-analyses find a modest but real link (around .20)."},
+   {q:"Saleh gives a polite smile, then a real one. What gives the real (Duchenne) smile away?",o:["Showing more teeth","Wrinkles around the eyes","A wider mouth","Raised eyebrows"],a:1,why:"A Duchenne smile reaches the eyes and creates ‘crow’s feet’."}]},
  mlq:{day:0,kind:"Questionnaire",title:"Meaning in Life Questionnaire",sub:"MLQ · 10 items · Steger et al. (2006)",type:"scale",
   intro:"Rate each statement for your life right now. Your answers stay on your phone.",
   labels:["Absolutely untrue","Mostly untrue","Somewhat untrue","Can’t say true or false","Somewhat true","Mostly true","Absolutely true"],values:[1,2,3,4,5,6,7],
@@ -104,7 +195,7 @@ const DATA = {
    {q:"Sultan’s presentation goes badly: “The projector failed and the room was noisy.”",o:["Permanence","Pervasiveness","Personalisation"],a:2,why:"He points to outside causes (external). Be careful: research shows stability and globality matter more than internal vs. external."}]},
  abc:{day:1,kind:"Activity",title:"Learning your ABCs",sub:"Turn one setback into a more optimistic explanation",
   type:"abc"},
- quiz1:{day:1,kind:"Quiz",title:"Day 1 exit quiz",sub:"6 questions · instant feedback",type:"quiz",
+ quiz1:{day:1,kind:"Quiz",title:"Part 1 exit quiz",sub:"6 questions · instant feedback",type:"quiz",
   items:[
    {q:"Dispositional optimism is best described as…",o:["A broad expectation that outcomes will be good","A way of explaining past failures","The belief that luck controls your life","Thinking that bad things never happen"],a:0,why:"Scheier and Carver define it as a trait: a general expectancy of good outcomes."},
    {q:"Which questionnaire measures dispositional optimism?",o:["ASQ","LOT-R","GSE","MLQ"],a:1,why:"The Life Orientation Test – Revised (10 items). The ASQ measures explanatory style."},
@@ -144,7 +235,7 @@ const DATA = {
    text:`Agency (the will): ${ag} out of 32 · Pathways (the ways): ${pa} out of 32. Higher means more hope. Compare your two parts: which one is stronger?`,
    detail:"Scoring: agency = items 2, 9, 10, 12; pathways = items 1, 4, 6, 8. Items 3, 5, 7 and 11 are fillers. Source: Snyder et al. (1991)."}}},
  bps:{day:2,kind:"Activity",title:"Best Possible Self",sub:"5-minute writing exercise",type:"bps"},
- quiz2:{day:2,kind:"Quiz",title:"Day 2 exit quiz",sub:"6 questions · instant feedback",type:"quiz",
+ quiz2:{day:2,kind:"Quiz",title:"Part 2 exit quiz",sub:"6 questions · instant feedback",type:"quiz",
   items:[
    {q:"Defensive pessimists…",o:["Never prepare","Set low expectations and plan for problems","Always perform worse than optimists","Have an external locus of control"],a:1,why:"Norem and Cantor (1986). They do worse if they are stopped from planning for the worst."},
    {q:"Thinking you are less likely than average to have a car accident is…",o:["Defensive pessimism","Unrealistic optimism","Self-efficacy","Collective efficacy"],a:1,why:"An optimistic bias in risk perception."},
@@ -401,12 +492,20 @@ function home(){
     `<a class="tile" href="#${k}" data-go="${k}"><span class="k">${v.kind}</span><span><b>${esc(v.title)}</b><span class="s">${esc(v.sub)}</span></span></a>`).join('');
   app.innerHTML=`<div><p class="eyebrow">PSY385 Positive Psychology · AUM</p><h1>Class Activities</h1></div>
   <p class="muted">Scan the QR code on the slide, or pick the activity your instructor names. Nothing you enter leaves your phone.</p>
-  <section class="day"><h3>Chapter 4 · Eudaimonic wellbeing</h3>${day(0)}</section>
+  <p class="eyebrow" style="margin-top:8px">Getting started</p>
+  <section class="day"><h3>Course introduction</h3>${day(10)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 1 · Introduction to Positive Psychology</p>
+  <section class="day"><h3>One session · From what is wrong to what is strong</h3>${day(11)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 2 · Understanding Emotions</p>
+  <section class="day"><h3>Part 1 · Positive emotions</h3>${day(21)}</section>
+  <section class="day"><h3>Part 2 · Sources of emotion and emotional intelligence</h3>${day(22)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 4 · Eudaimonic Wellbeing</p>
+  <section class="day"><h3>Part 2 · Flow, meaning and life’s big questions</h3>${day(0)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 5 · Optimism, Explanatory Style and Hope</p>
-  <section class="day"><h3>Day 1 · Optimism and explanatory style</h3>${day(1)}</section>
-  <section class="day"><h3>Day 2 · Control, the three selves and hope</h3>${day(2)}</section>
+  <section class="day"><h3>Part 1 · Optimism and explanatory style</h3>${day(1)}</section>
+  <section class="day"><h3>Part 2 · Control, the three selves and hope</h3>${day(2)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 6 · Resilience, Post-Traumatic Growth and Positive Ageing</p>
-  <section class="day"><h3>Day 1 · Resilience, coping, growth and ageing</h3>${day(6)}</section>
+  <section class="day"><h3>One session · Resilience, coping, growth and ageing</h3>${day(6)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 7 · Values, Motivation and Goal Theories</p>
   <section class="day"><h3>Part 1 · Goals and motivation</h3>${day(71)}</section>
   <section class="day"><h3>Part 2 · Values and time</h3>${day(72)}</section>
@@ -418,7 +517,7 @@ function home(){
   <section class="day"><h3>Part 1 · Character strengths</h3>${day(101)}</section>
   <section class="day"><h3>Part 2 · Therapy, coaching, education and work</h3>${day(102)}</section>`;
 }
-function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.chap?v.chap:v.day===6?"Chapter 6":v.day?"Chapter 5 · Day "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
+function header(v){return `<button class="back" data-go="">← All activities</button><div><p class="eyebrow">${v.chap?v.chap:v.day===6?"Chapter 6":v.day?"Chapter 5 · Part "+v.day:"Chapter 4"} · ${v.kind}</p><h2>${esc(v.title)}</h2></div>${v.intro?`<p class="muted">${esc(v.intro)}</p>`:''}`}
 
 function poll(k,v){
   const saved=store.get('p_'+k)||{};
