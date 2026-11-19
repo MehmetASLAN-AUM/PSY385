@@ -514,6 +514,154 @@ const DATA = {
    {q:"A large UK trial taught mindfulness to about 8,000 students. What did it find?",o:["It worked better than usual teaching for mental health","It was no better than usual social-emotional teaching","It harmed students","It doubled grades"],a:1,why:"School mindfulness training was not better than usual teaching. Good intentions still need evidence."},
    {q:"Why do some governments now measure citizens’ well-being, not just GDP?",o:["Because GDP is always wrong","Because money measures miss much of what makes life worth living","To replace elections","Because it is cheaper"],a:1,why:"Well-being measures help governments see which policies actually improve people’s lives."}]}
 };
+// ---- live summaries for questionnaires (one anonymous category per student) ----
+DATA.flour1.live={q:"Which item was your LOWEST?",o:["Meaning and purpose","Supportive relationships","Engagement","Contributing to others","Competence","Being a good person","Optimism","Feeling respected"],pick:a=>a.indexOf(Math.min(...a))};
+DATA.spane2.live={q:"Where did your affect balance (SPANE-B) fall?",o:["+13 to +24","+1 to +12","0","−1 to −12","−13 to −24"],pick:a=>{const B=a[0]+a[2]+a[4]+a[6]+a[9]+a[11]-(a[1]+a[3]+a[5]+a[7]+a[8]+a[10]);return B>=13?0:B>=1?1:B===0?2:B>=-12?3:4}};
+DATA.needs7.live={q:"Which of your three need scores was the LOWEST?",o:["Autonomy","Competence","Relatedness","All about the same"],pick:a=>{const r=v=>6-v,s=[(a[0]+r(a[1])+a[2])/3,(a[3]+r(a[4])+a[5])/3,(a[6]+r(a[7])+a[8])/3];return Math.max(...s)-Math.min(...s)<0.34?3:s.indexOf(Math.min(...s))}};
+DATA.tp7.live={q:"Which time perspective was your STRONGEST?",o:["Future","Present-hedonistic","Present-fatalistic","Past-positive","Past-negative"],pick:a=>{const m=[0,2,4,6,8].map(i=>(a[i]+a[i+1])/2);return m.indexOf(Math.max(...m))}};
+DATA.grit8.live={q:"Which of your two grit scores was HIGHER?",o:["Perseverance of effort","Consistency of interest","About the same"],pick:a=>{const r=v=>6-v,P=(a[0]+a[1]+a[2]+a[3])/4,I=(r(a[4])+r(a[5])+r(a[6])+r(a[7]))/4;return Math.abs(P-I)<0.25?2:P>I?0:1}};
+DATA.school10.live={q:"Which feature did you rate LOWEST?",o:["Safety","Shared purpose","Clear goals","Individual attention","Recognising effort","Belonging"],pick:a=>a.indexOf(Math.min(...a))};
+DATA.lotr.live={q:"Where did your LOT-R optimism score fall?",o:["0–11 (less optimistic)","12–17 (in the middle)","18–24 (more optimistic)"],pick:a=>{const r=v=>4-v,s=a[0]+a[3]+a[9]+r(a[2])+r(a[6])+r(a[8]);return s<=11?0:s<=17?1:2}};
+DATA.gse.live={q:"Where did your self-efficacy score fall?",o:["10–24","25–32 (around the average of 29)","33–40"],pick:a=>{const s=a.reduce((x,y)=>x+y,0);return s<=24?0:s<=32?1:2}};
+DATA.hope.live={q:"Which part of your hope was stronger?",o:["Agency (the will)","Pathways (the ways)","About equal"],pick:a=>{const ag=a[1]+a[8]+a[9]+a[11],pa=a[0]+a[3]+a[5]+a[7];return Math.abs(ag-pa)<=2?2:ag>pa?0:1}};
+DATA.brs.live={q:"Where did your resilience score fall?",o:["Low (1–2.99)","Normal (3–4.30)","High (4.31–5)"],pick:a=>{const r=v=>6-v,s=(a[0]+r(a[1])+a[2]+r(a[3])+a[4]+r(a[5]))/6;return s<3?0:s<=4.3?1:2}};
+DATA.mlq.live={q:"Which pattern fits your MLQ scores?",o:["Meaning present, still searching","Meaning present, not searching","Still searching for meaning","Neither high right now"],pick:a=>{const p=a[0]+a[3]+a[4]+a[5]+(8-a[8]),se=a[1]+a[2]+a[6]+a[7]+a[9];return p>24&&se>24?0:p>24?1:se>24?2:3}};
+// ---- new phone activities for slide-based quick checks and class votes ----
+const TF=["True","False"];
+Object.assign(DATA,{
+ // Chapter 2 Part 2
+ myths2:{day:22,chap:"Chapter 2 · Part 2",kind:"Quick check",title:"Brain myths: myth or fact?",sub:"3 statements",type:"quiz",items:[
+  {q:"“Dopamine is the pleasure chemical.”",o:["Fact","Myth","Mostly myth or oversimplified"],a:2,why:"Dopamine is mainly about wanting. Pleasure itself uses small opioid “hotspots” (Berridge & Kringelbach, 2015)."},
+  {q:"“We have a reptile brain inside a human brain.”",o:["Fact","Myth","Mostly myth or oversimplified"],a:1,why:"The “triune brain” idea is outdated: brains reorganised over evolution; they did not stack (Cesario et al., 2020)."},
+  {q:"“The amygdala is the fear centre.”",o:["Fact","Myth","Mostly myth or oversimplified"],a:2,why:"It responds to anything important, good or bad, not only fear (Barrett, 2017)."}]},
+ mid2:{day:22,chap:"Chapter 2 · Part 2",kind:"Quick check",title:"Midpoint check",sub:"4 questions",type:"quiz",items:[
+  {q:"The circumplex model’s two dimensions are…",o:["Intensity and duration","Pleasantness and energy","Approach and avoid"],a:1,why:"Valence (pleasantness) and arousal (energy), Russell (1980)."},
+  {q:"Positive affect mainly reflects…",o:["Having reached a goal","Setting many goals","Faster-than-expected progress"],a:2,why:"We feel good when progress towards a goal is faster than expected (Carver & Scheier, 1990)."},
+  {q:"Dopamine is mostly about…",o:["Wanting and motivation","The feeling of pleasure","Fear"],a:0,why:"Wanting, not liking."},
+  {q:"Which positive affect protects most against depression?",o:["Activated","Relaxed","Safe and content"],a:2,why:"Feeling safe, warm and connected was the strongest protector (Gilbert et al., 2008)."}]},
+ // Chapter 3 Part 1
+ plug3:{day:31,chap:"Chapter 3 · Part 1",kind:"Poll",title:"Would you plug in to the machine?",sub:"One question",type:"poll",items:[
+  {q:"A machine can give you only wonderful experiences for the rest of your life. You would not know they are not real. Do you plug in?",o:["Yes, I would plug in","No, I would stay in the real world","Not sure"],
+   after:"Most people say no: we want real relationships and real achievements, not only pleasure (Nozick, 1974)."}]},
+ cog3:{day:31,chap:"Chapter 3 · Part 1",kind:"Quick check",title:"Which is the cognitive part of SWB?",sub:"1 question",type:"quiz",items:[
+  {q:"Which is the cognitive part of subjective wellbeing?",o:["Feeling joyful many times a day","Rarely feeling anxious or angry","Judging that your life is close to your ideal","Feeling very intense excitement"],a:2,why:"Life satisfaction is a judgement (cognitive). The other options are about feelings (affect)."}]},
+ tf3a:{day:31,chap:"Chapter 3 · Part 1",kind:"Quick check",title:"True or false?",sub:"5 statements",type:"quiz",items:[
+  {q:"SWB means having no negative emotions at all.",o:TF,a:1,why:"It means low negative affect and a good balance, not zero."},
+  {q:"On the Cantril ladder, a person scoring 5 or 6 is “struggling”.",o:TF,a:0,why:"7+ is thriving, 5–6 struggling, 4 or below suffering."},
+  {q:"Most people in the world describe themselves as unhappy.",o:TF,a:1,why:"Most people score in the “somewhat satisfied” range."},
+  {q:"In the textbook, money matters most for happiness in poor nations.",o:TF,a:0,why:"There it meets basic needs such as food and shelter."},
+  {q:"Experience sampling asks people to remember how they felt last year.",o:TF,a:1,why:"It asks how they feel right now, which reduces memory bias."}]},
+ // Chapter 3 Part 2
+ job3:{day:32,chap:"Chapter 3 · Part 2",kind:"Quick check",title:"Job, career or calling?",sub:"3 workers",type:"quiz",items:[
+  {q:"Salem works in a bank. He watches the clock all day and says, “I am only here for the salary.”",o:["Job","Career","Calling"],a:0,why:"Work is only a means to an end: money."},
+  {q:"Nasser, a junior engineer, takes every course that could get him promoted to team leader in two years.",o:["Job","Career","Calling"],a:1,why:"Work is a way to move forward and gain status."},
+  {q:"Khaled teaches PE. He says he would still do it for less pay because “helping boys grow is what I am for.”",o:["Job","Career","Calling"],a:2,why:"The work is worthy in its own right."}]},
+ corr3:{day:32,chap:"Chapter 3 · Part 2",kind:"Quick check",title:"Which statement is correct?",sub:"1 question",type:"quiz",items:[
+  {q:"Which statement is correct?",o:["Parents score higher on wellbeing than non-parents","The marriage boost lasts for life","Relationships are among the best predictors of SWB","Older people are much less happy than the young"],a:2,why:"Parents score lower on wellbeing measures, the marriage boost fades after about a year, and older people are as happy as younger people."}]},
+ world3:{day:32,chap:"Chapter 3 · Part 2",kind:"Poll",title:"Which world would you choose?",sub:"One question",type:"poll",items:[
+  {q:"Prices are the same in both worlds. Which do you choose?",o:["World A: I earn $50,000; others earn $25,000","World B: I earn $100,000; others earn $250,000"],
+   after:"Many people choose A, even though B pays double: we judge our lives by comparison with others."}]},
+ max3:{day:32,chap:"Chapter 3 · Part 2",kind:"Poll",title:"Maximizer or satisficer?",sub:"3 situations",type:"poll",items:[
+  {q:"Buying a new laptop or phone",o:["I look for the best","I stop at good enough"],after:"Looking for the best is maximizing; stopping at good enough is satisficing."},
+  {q:"Choosing where to eat with friends tonight",o:["I look for the best","I stop at good enough"],after:"Most people satisfice for small, everyday choices."},
+  {q:"Picking next semester’s elective course",o:["I look for the best","I stop at good enough"],after:"Maximizers earn more but report more regret and less happiness."}]},
+ think3:{day:32,chap:"Chapter 3 · Part 2",kind:"Quick check",title:"Which thinking pattern is it?",sub:"4 thoughts",type:"quiz",items:[
+  {q:"“I got 68 on the quiz. My whole semester is ruined.”",o:["Awfulizing","Rejection goggles","Perfectionism","Learned helplessness"],a:0,why:"Treating one setback as a catastrophe is awfulizing."},
+  {q:"“He didn’t reply to my message. He must hate me.”",o:["Awfulizing","Rejection goggles","Perfectionism","Learned helplessness"],a:1,why:"Seeing rejection that is not there."},
+  {q:"“I got 95, but I lost five marks, so it was a bad exam.”",o:["Awfulizing","Rejection goggles","Perfectionism","Learned helplessness"],a:2,why:"Anything less than perfect feels like failure."},
+  {q:"“Studying won’t help. I’m just bad at statistics.”",o:["Awfulizing","Rejection goggles","Perfectionism","Learned helplessness"],a:3,why:"Believing nothing you do makes a difference."}]},
+ tf3b:{day:32,chap:"Chapter 3 · Part 2",kind:"Quick check",title:"True or false?",sub:"5 statements",type:"quiz",items:[
+  {q:"The textbook says strong reactions to events fade in about three months.",o:TF,a:0,why:"This is hedonic adaptation, the “hedonic treadmill”."},
+  {q:"In the jam study, the stand with 24 jams sold the most jars.",o:TF,a:1,why:"Only 3% bought, against 30% at the six-jam stand."},
+  {q:"Maximizers earn more and are also happier than satisficers.",o:TF,a:1,why:"They earn more but feel more regret and are less happy."},
+  {q:"People recover quickly from long-term unemployment.",o:TF,a:1,why:"It is one of the few events we do not fully adapt to."},
+  {q:"In AIM, the M stands for savouring good memories.",o:TF,a:0,why:"Attention, Interpretation, Memory."}]},
+ // Chapter 4 Part 1
+ happy4:{day:41,chap:"Chapter 4 · Part 1",kind:"Poll",title:"Warm-up: happy or meaningful?",sub:"One question",type:"poll",items:[
+  {q:"“I would rather wake up unhappy than without meaning in my life.”",o:["Agree","Disagree","Not sure"],after:"Today we look at the eudaimonic view: a good life is more than feeling good."}]},
+ rec4:{day:41,chap:"Chapter 4 · Part 1",kind:"Quick check",title:"Recall: subjective wellbeing",sub:"1 question",type:"quiz",items:[
+  {q:"Subjective wellbeing (SWB) is made of…",o:["Meaning + purpose + growth","Life satisfaction + high positive affect + low negative affect","Autonomy + competence + relatedness","Genes + circumstances + activities"],a:1,why:"SWB is the hedonic view. Today we meet the eudaimonic view (A) and SDT’s three needs (C)."}]},
+ hed4:{day:41,chap:"Chapter 4 · Part 1",kind:"Quick check",title:"Hedonic, eudaimonic or both?",sub:"5 activities",type:"quiz",items:[
+  {q:"Scrolling short videos for an hour after an exam",o:["Hedonic","Eudaimonic","Both"],a:0,why:"Pleasant and relaxing, but not growth or purpose."},
+  {q:"Tutoring a younger cousin in maths every weekend",o:["Hedonic","Eudaimonic","Both"],a:1,why:"Uses your skills to serve someone else."},
+  {q:"Training for a half marathon for six months",o:["Hedonic","Eudaimonic","Both"],a:1,why:"Challenging, self-chosen growth (often not fun in the moment)."},
+  {q:"A long dinner with close friends at your favourite restaurant",o:["Hedonic","Eudaimonic","Both"],a:2,why:"Pleasure plus connection: the two traditions overlap."},
+  {q:"Volunteering at a food drive during Ramadan",o:["Hedonic","Eudaimonic","Both"],a:1,why:"Serving something larger than yourself, in line with values."}]},
+ eud4:{day:41,chap:"Chapter 4 · Part 1",kind:"Quick check",title:"Which best describes eudaimonia?",sub:"1 question",type:"quiz",items:[
+  {q:"Which best describes eudaimonia?",o:["Feeling as much pleasure as possible","Having more positive than negative emotions","Realising your true nature and potential","Being satisfied with your income"],a:2,why:"Eudaimonia means fulfilling your daimon, or true nature. A and B describe the hedonic view."}]},
+ route4:{day:41,chap:"Chapter 4 · Part 1",kind:"Quick check",title:"Strengths in service of others: which route?",sub:"1 question",type:"quiz",items:[
+  {q:"Using your strengths in the service of something bigger than you is…",o:["The pleasant life","The good life","The meaningful life","The hedonic treadmill"],a:2,why:"The meaningful life is Seligman’s third route. The good life is about engagement and flow."}]},
+ need4:{day:41,chap:"Chapter 4 · Part 1",kind:"Quick check",title:"Which need, and is it met or blocked?",sub:"5 students",type:"quiz",items:[
+  {q:"Bader’s group leader assigns every task and rewrites his work.",o:["Autonomy · met","Autonomy · blocked","Competence · met","Competence · blocked","Relatedness · met","Relatedness · blocked"],a:1,why:"He has no choice or control over his own work."},
+  {q:"Saud’s instructor sets a hard project with feedback on each draft.",o:["Autonomy · met","Autonomy · blocked","Competence · met","Competence · blocked","Relatedness · met","Relatedness · blocked"],a:2,why:"Challenge plus feedback builds mastery."},
+  {q:"Nawaf transferred to AUM this term and eats lunch alone every day.",o:["Autonomy · met","Autonomy · blocked","Competence · met","Competence · blocked","Relatedness · met","Relatedness · blocked"],a:5,why:"He lacks connection and belonging."},
+  {q:"Mubarak’s internship manager lets him choose which project to lead.",o:["Autonomy · met","Autonomy · blocked","Competence · met","Competence · blocked","Relatedness · met","Relatedness · blocked"],a:0,why:"He acts from his own choice."},
+  {q:"Fahad gets tasks far beyond his skills, with no guidance at all.",o:["Autonomy · met","Autonomy · blocked","Competence · met","Competence · blocked","Relatedness · met","Relatedness · blocked"],a:3,why:"Too hard with no support: he cannot succeed."}]},
+ tf4a:{day:41,chap:"Chapter 4 · Part 1",kind:"Quick check",title:"True or false?",sub:"5 statements",type:"quiz",items:[
+  {q:"Eudaimonia means fulfilling or realising your true nature.",o:TF,a:0,why:"From “daimon”, your true self or nature."},
+  {q:"All six of Ryff’s dimensions correlate strongly with SWB.",o:TF,a:1,why:"Only self-acceptance and environmental mastery link moderately."},
+  {q:"In Seligman’s model, the good life is about engagement and flow.",o:TF,a:0,why:"The pleasant life is about positive emotion."},
+  {q:"SDT’s three basic needs are autonomy, competence and relatedness.",o:TF,a:0,why:"Deci and Ryan’s self-determination theory."},
+  {q:"Researchers agree on one clear definition of eudaimonic wellbeing.",o:TF,a:1,why:"Boniwell called the area “at best, a mess”."}]},
+ // Chapter 4 Part 2
+ theory4:{day:42,chap:"Chapter 4 · Part 2",kind:"Quick check",title:"Recall: name the theory",sub:"4 descriptions",type:"quiz",items:[
+  {q:"Six dimensions, including environmental mastery and self-acceptance",o:["Ryff’s psychological wellbeing","Authentic happiness","Self-determination theory","Eudaimonia"],a:0,why:"Psychological wellbeing (Ryff, 1989)."},
+  {q:"The pleasant life, the good life and the meaningful life",o:["Ryff’s psychological wellbeing","Authentic happiness","Self-determination theory","Eudaimonia"],a:1,why:"Seligman (2002), later widened into PERMA."},
+  {q:"Autonomy, competence and relatedness",o:["Ryff’s psychological wellbeing","Authentic happiness","Self-determination theory","Eudaimonia"],a:2,why:"Self-determination theory (Deci & Ryan)."},
+  {q:"Fulfilling your daimon, or true nature",o:["Ryff’s psychological wellbeing","Authentic happiness","Self-determination theory","Eudaimonia"],a:3,why:"Aristotle’s idea of realising your potential."}]},
+ flow4:{day:42,chap:"Chapter 4 · Part 2",kind:"Quick check",title:"Flow: challenge and skill",sub:"1 question",type:"quiz",items:[
+  {q:"A task is far above your skill. You will most likely feel…",o:["Flow","Boredom","Anxiety","Apathy"],a:2,why:"Challenge above skill produces anxiety. Skill above challenge produces boredom; low challenge and low skill produce apathy."}]},
+ tf4b:{day:42,chap:"Chapter 4 · Part 2",kind:"Quick check",title:"True or false?",sub:"5 statements",type:"quiz",items:[
+  {q:"Flow happens when the challenge is much higher than your skill.",o:TF,a:1,why:"That produces anxiety. Flow needs challenge and skill to match."},
+  {q:"Flow can also happen in harmful activities such as gambling.",o:TF,a:0,why:"Flow is not automatically a moral good."},
+  {q:"Frankl’s three values are creative, experiential and attitudinal.",o:TF,a:0,why:"From his idea of the “will to meaning”."},
+  {q:"On the MLQ, “presence” measures how actively you search for meaning.",o:TF,a:1,why:"Presence = meaning you already have; search = looking for it."},
+  {q:"Terror management theory says death reminders make us defend our worldview.",o:TF,a:0,why:"This is the mortality salience hypothesis."}]},
+ // Chapter 5 recall checks
+ rec5:{day:1,kind:"Quick check",title:"Recall: when does flow happen?",sub:"1 question",type:"quiz",items:[
+  {q:"Flow is most likely when…",o:["The task is far above your skill","The task is far below your skill","Challenge and skill are both high and matched","You are relaxing with no goal"],a:2,why:"Too hard gives anxiety, too easy gives boredom."}]},
+ name5:{day:2,kind:"Quick check",title:"Recall: name it",sub:"4 descriptions",type:"quiz",items:[
+  {q:"A general expectation that things will turn out well",o:["Dispositional optimism","Pessimistic explanatory style","The ABC model","A meta-analysis of optimism and health"],a:0,why:"Scheier & Carver; measured by the LOT-R."},
+  {q:"Explaining a setback as permanent, pervasive and personal",o:["Dispositional optimism","Pessimistic explanatory style","The ABC model","A meta-analysis of optimism and health"],a:1,why:"Seligman’s explanatory style: the 3 Ps."},
+  {q:"Adversity → Belief → Consequence",o:["Dispositional optimism","Pessimistic explanatory style","The ABC model","A meta-analysis of optimism and health"],a:2,why:"Catch the belief, then dispute it (D) and energise (E)."},
+  {q:"Optimists were 35% less likely to have a heart attack or stroke",o:["Dispositional optimism","Pessimistic explanatory style","The ABC model","A meta-analysis of optimism and health"],a:3,why:"Rozanski et al. (2019): about 230,000 people. A link, not proof of cause."}]},
+ // Midterm review practice
+ mt3tf:{day:35,chap:"Midterm review",kind:"Practice",title:"Chapter 3: true or false",sub:"6 statements",type:"quiz",items:[
+  {q:"Subjective wellbeing includes both cognitive evaluations of life satisfaction and affective components such as positive and negative emotions.",o:TF,a:0,why:"SWB = life satisfaction + positive and negative affect."},
+  {q:"Higher income always guarantees higher subjective wellbeing regardless of other life circumstances.",o:TF,a:1,why:"Income helps mostly up to a basic threshold."},
+  {q:"Job satisfaction is strongly correlated with subjective wellbeing.",o:TF,a:0,why:"Positive work experiences add to overall life satisfaction."},
+  {q:"Strong social relationships and supportive networks are associated with higher subjective wellbeing.",o:TF,a:0,why:"Relationships are among the best predictors of SWB."},
+  {q:"Religious engagement has no measurable effect on subjective wellbeing.",o:TF,a:1,why:"Religion is linked to higher wellbeing, mainly through support and meaning."},
+  {q:"Physical health and subjective wellbeing are positively related.",o:TF,a:0,why:"Better health generally predicts higher wellbeing."}]},
+ mt3mc:{day:35,chap:"Midterm review",kind:"Practice",title:"Chapter 3: multiple choice",sub:"4 questions",type:"quiz",items:[
+  {q:"Which of the following is commonly used to measure subjective wellbeing?",o:["Life Satisfaction Scale","Positive and Negative Affect Schedule (PANAS)","Both a and b","IQ test"],a:2,why:"Life satisfaction scales and the PANAS are both standard SWB measures."},
+  {q:"The relationship between income and subjective wellbeing is…",o:["Strong and linear at all income levels","Strong at low incomes, with diminishing returns at higher incomes","Negative","Unrelated"],a:1,why:"Money matters most where basic needs are not yet met."},
+  {q:"Which factor is NOT typically associated with higher subjective wellbeing?",o:["Secure employment","Frequent conflicts in social relationships","Good physical health","Regular participation in meaningful activities"],a:1,why:"Conflict in relationships lowers wellbeing."},
+  {q:"Which statement best describes the link between religion and subjective wellbeing?",o:["Religious people always report higher wellbeing","Religious engagement can enhance wellbeing mainly through community support and meaning-making","Religion has a negative effect on wellbeing","Religion is unrelated to life satisfaction"],a:1,why:"The effect is real but not universal, and works through support and meaning."}]},
+ mt4tf:{day:35,chap:"Midterm review",kind:"Practice",title:"Chapter 4: true or false",sub:"6 statements",type:"quiz",items:[
+  {q:"Eudaimonic happiness emphasises personal growth, purpose and self-realisation, rather than just pleasure.",o:TF,a:0,why:"That is the eudaimonic view."},
+  {q:"Psychological wellbeing is solely determined by external circumstances such as wealth or social status.",o:TF,a:1,why:"PWB also depends on growth, purpose and other inner factors."},
+  {q:"Self-determination theory identifies autonomy, competence and relatedness as core psychological needs.",o:TF,a:0,why:"These are SDT’s three basic needs."},
+  {q:"Flow experiences are characterised by boredom and lack of focus.",o:TF,a:1,why:"Flow means total concentration and absorption."},
+  {q:"Meaning in life is strongly associated with higher psychological wellbeing and life satisfaction.",o:TF,a:0,why:"Meaning is a core part of wellbeing."},
+  {q:"A positive death perspective involves accepting mortality and finding meaning in life’s finitude.",o:TF,a:0,why:"Facing death can help us live more authentically."}]},
+ mt4mc:{day:35,chap:"Midterm review",kind:"Practice",title:"Chapter 4: multiple choice",sub:"4 questions",type:"quiz",items:[
+  {q:"Which statement best describes eudaimonic wellbeing?",o:["Focused on maximising pleasure","Focused on living according to one’s true potential","Avoiding challenges","Accumulating material wealth"],a:1,why:"Eudaimonia means realising your true nature."},
+  {q:"According to self-determination theory, which is NOT one of the three basic psychological needs?",o:["Autonomy","Competence","Popularity","Relatedness"],a:2,why:"The three needs are autonomy, competence and relatedness."},
+  {q:"Flow is most likely to occur when…",o:["Challenges match an individual’s skill level","Tasks are extremely easy","The person is multitasking","The task is unpleasant"],a:0,why:"Flow needs challenge and skill to match."},
+  {q:"Which perspective emphasises finding meaning and purpose even in the face of mortality?",o:["Hedonic wellbeing","Flow theory","Positive death perspective","Self-determination"],a:2,why:"Meaning management: facing death can push us to live authentically."}]},
+ mt5mc:{day:35,chap:"Midterm review",kind:"Practice",title:"Chapter 5: multiple choice",sub:"3 questions",type:"quiz",items:[
+  {q:"What is optimism?",o:["A positive attitude towards everything, ignoring threats to our wellbeing","A strong belief that outcomes are likely to be more positive"],a:1,why:"Optimism is a broad expectancy of positive outcomes, not ignoring threats."},
+  {q:"Defensive pessimism is about…",o:["A negative impact on academic performance","Preparing for potential obstacles","Helping to become successful in life"],a:1,why:"Expect the worst, then plan for it."},
+  {q:"What are the benefits of being an optimist?",o:["Active coping with stress","Protection of mothers from depression after birth","Better health habits","A belief in controlling one’s own health","All of these"],a:4,why:"All four are benefits of optimism in the textbook."}]},
+ mt5tf:{day:35,chap:"Midterm review",kind:"Practice",title:"Chapter 5: the three selves",sub:"6 statements",type:"quiz",items:[
+  {q:"Self-confidence is the belief in one’s general ability to handle tasks and challenges.",o:TF,a:0,why:"Self-confidence is general."},
+  {q:"Self-efficacy refers to how much a person values and accepts themselves as worthy.",o:TF,a:1,why:"That describes self-esteem, not self-efficacy."},
+  {q:"Self-efficacy is specific to a task or situation (e.g., “I can do this exam well”).",o:TF,a:0,why:"Self-efficacy is task-specific."},
+  {q:"A person can have high self-esteem but low self-efficacy in a particular skill.",o:TF,a:0,why:"Overall worth and task confidence are different."},
+  {q:"Self-confidence and self-efficacy are exactly the same.",o:TF,a:1,why:"Self-confidence is general; self-efficacy is task-specific."},
+  {q:"Self-esteem is a belief about one specific task, such as tomorrow’s quiz.",o:TF,a:1,why:"That is self-efficacy; self-esteem is your overall sense of worth."}]}
+});
 
 const app=document.getElementById('app');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -524,13 +672,14 @@ const LIVE="https://script.google.com/macros/s/AKfycbxHhtaASTQQY8flOhLDtkRgiM0M3
 function sid(){let x=store.get('sid');if(!x){x=Math.random().toString(36).slice(2,12);store.set('sid',x)}return x}
 function send(k,i,j){if(!LIVE)return;try{fetch(LIVE,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({a:k,q:i,o:j,s:sid()})}).catch(()=>{})}catch(e){}}
 let liveTick=null;
-function liveView(k,v){
+function liveView(k,v,start){
+  if(v.type==='scale')v=Object.assign({},v,{type:'poll',items:[v.live]});
   document.body.classList.add('live');
   const isQuiz=v.type==='quiz',N=v.items.length,join=location.origin+location.pathname+'#'+k;
-  let cur=0,reveal=false,data={n:0,q:{}};
+  let cur=Math.min(start||0,v.items.length-1),reveal=false,data={n:0,q:{}};
   const WIN=90*60*1000,since=()=>Math.max(store.get('since_'+k)||0,Date.now()-WIN);
   app.innerHTML=`<button class="back" data-go="">← All activities</button>
-   <div class="lv-top"><div><p class="eyebrow">${esc(v.chap||'')} · Live class results</p><h2>${esc(v.title)}</h2>
+   <div class="lv-top"><div><p class="eyebrow">${esc(v.chap||(v.day===6?"Chapter 6":v.day===0?"Chapter 4 · Part 2":v.day?"Chapter 5 · Part "+v.day:""))} · Live class results</p><h2>${esc(v.title)}</h2>
      <div class="lv-bar"><span class="lv-count" id="lvn">0</span><span>responses<br><span class="lv-live"><i></i>updating live · answers from the last 90 minutes</span></span></div></div>
      <div class="lv-join"><div id="lvqr"></div><div><b>Scan to join</b><p>${esc(join.replace(/^https?:\/\//,''))}</p><p>No sign-in · anonymous</p></div></div></div>
    <div class="card" id="lvcard"></div>
@@ -564,7 +713,7 @@ function home(){
   const day=n=>Object.entries(DATA).filter(([k,v])=>k!=='home'&&v.day===n).map(([k,v])=>
     `<a class="tile" href="#${k}" data-go="${k}"><span class="k">${v.kind}</span><span><b>${esc(v.title)}</b><span class="s">${esc(v.sub)}</span></span></a>`).join('');
   app.innerHTML=`<div><p class="eyebrow">PSY385 Positive Psychology · AUM</p><h1>Class Activities</h1></div>
-  <p class="muted">Scan the QR code on the slide, or pick the activity your instructor names. Nothing you enter leaves your phone.</p>
+  <p class="muted">Scan the QR code on the slide, or pick the activity your instructor names. No sign-in and no names: class votes and quiz answers are counted anonymously.</p>
   <p class="eyebrow" style="margin-top:8px">Getting started</p>
   <section class="day"><h3>Course introduction</h3>${day(10)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 1 · Introduction to Positive Psychology</p>
@@ -572,11 +721,17 @@ function home(){
   <p class="eyebrow" style="margin-top:8px">Chapter 2 · Understanding Emotions</p>
   <section class="day"><h3>Part 1 · Positive emotions</h3>${day(21)}</section>
   <section class="day"><h3>Part 2 · Sources of emotion and emotional intelligence</h3>${day(22)}</section>
+  <p class="eyebrow" style="margin-top:8px">Chapter 3 · Subjective Wellbeing</p>
+  <section class="day"><h3>Part 1 · What is subjective wellbeing?</h3>${day(31)}</section>
+  <section class="day"><h3>Part 2 · What makes us happy, and what gets in the way</h3>${day(32)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 4 · Eudaimonic Wellbeing</p>
-  <section class="day"><h3>Part 2 · Flow, meaning and life’s big questions</h3>${day(0)}</section>
+  <section class="day"><h3>Part 1 · Eudaimonia, PWB and self-determination</h3>${day(41)}</section>
+  <section class="day"><h3>Part 2 · Flow, meaning and life’s big questions</h3>${day(0)}${day(42)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 5 · Optimism, Explanatory Style and Hope</p>
   <section class="day"><h3>Part 1 · Optimism and explanatory style</h3>${day(1)}</section>
   <section class="day"><h3>Part 2 · Control, the three selves and hope</h3>${day(2)}</section>
+  <p class="eyebrow" style="margin-top:8px">Midterm review · Chapters 3–5</p>
+  <section class="day"><h3>Practice questions</h3>${day(35)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 6 · Resilience, Post-Traumatic Growth and Positive Ageing</p>
   <section class="day"><h3>One session · Resilience, coping, growth and ageing</h3>${day(6)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 7 · Values, Motivation and Goal Theories</p>
@@ -585,7 +740,7 @@ function home(){
   <p class="eyebrow" style="margin-top:8px">Chapter 8 · Positive Psychological Interventions</p>
   <section class="day"><h3>One session · Mindsets, grit, change and positive activities</h3>${day(8)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 9 · Physical Activity and Positive Psychology</p>
-  <section class="day"><h3>One session · The body, movement and well-being</h3>${day(9)}</section>
+  <section class="day"><h3>One session · The body, movement and wellbeing</h3>${day(9)}</section>
   <p class="eyebrow" style="margin-top:8px">Chapter 10 · Applying Positive Psychology</p>
   <section class="day"><h3>Part 1 · Character strengths</h3>${day(101)}</section>
   <section class="day"><h3>Part 2 · Therapy, coaching, education and work</h3>${day(102)}</section>`;
@@ -627,8 +782,8 @@ function scale(k,v){
   app.querySelectorAll('.scale button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;ans[i]=+b.dataset.n;
     app.querySelectorAll(`.scale button[data-i="${i}"]`).forEach(x=>x.setAttribute('aria-pressed',x===b));
     const c=ans.filter(x=>x!==null).length;document.getElementById('prog').textContent=`${c} of ${v.items.length} answered`;go.disabled=c<v.items.length;});
-  go.onclick=()=>{const s=v.score(ans),r=document.getElementById('res');r.hidden=false;
-    r.innerHTML=`<p class="eyebrow">${esc(s.label)}</p><p class="big">${s.main}</p><div class="bar"><i style="width:${Math.round(s.main/s.max*100)}%"></i></div><p>${esc(s.text)}</p><p class="note">${esc(s.detail)}</p><p class="note">This is a learning exercise, not a diagnosis. Your answers are not sent anywhere.</p>`;
+  go.onclick=()=>{const s=v.score(ans),r=document.getElementById('res');r.hidden=false;if(v.live)send(k,0,v.live.pick(ans));
+    r.innerHTML=`<p class="eyebrow">${esc(s.label)}</p><p class="big">${s.main}</p><div class="bar"><i style="width:${Math.round(s.main/s.max*100)}%"></i></div><p>${esc(s.text)}</p><p class="note">${esc(s.detail)}</p><p class="note">This is a learning exercise, not a diagnosis. ${v.live&&LIVE?"Your answers stay on your phone. Only one anonymous summary (“"+esc(v.live.o[v.live.pick(ans)])+"”) is added to the class results on screen.":"Your answers are not sent anywhere."}</p>`;
     r.scrollIntoView({behavior:'smooth',block:'start'});};
 }
 function abc(k,v){
@@ -661,7 +816,8 @@ function route(){
   if(tick){clearInterval(tick);tick=null}
   if(liveTick){clearInterval(liveTick);liveTick=null}document.body.classList.remove('live');
   const k=(location.hash||'').slice(1);const v=DATA[k];
-  if(k.startsWith('live-')&&DATA[k.slice(5)]){liveView(k.slice(5),DATA[k.slice(5)]);}
+  const lk=k.startsWith('live-')?k.slice(5).split('~'):null;
+  if(lk&&DATA[lk[0]]&&(DATA[lk[0]].items||DATA[lk[0]].live)&&(DATA[lk[0]].type!=='scale'||DATA[lk[0]].live)){liveView(lk[0],DATA[lk[0]],(+lk[1]||1)-1);}
   else if(!v||k==='home'){home();}
   else ({poll,quiz,scale,abc,bps})[v.type](k,v);
   app.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const g=b.dataset.go;
