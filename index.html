@@ -528,14 +528,14 @@ function liveView(k,v){
   document.body.classList.add('live');
   const isQuiz=v.type==='quiz',N=v.items.length,join=location.origin+location.pathname+'#'+k;
   let cur=0,reveal=false,data={n:0,q:{}};
-  const since=()=>store.get('since_'+k)||0;
+  const WIN=90*60*1000,since=()=>Math.max(store.get('since_'+k)||0,Date.now()-WIN);
   app.innerHTML=`<button class="back" data-go="">← All activities</button>
    <div class="lv-top"><div><p class="eyebrow">${esc(v.chap||'')} · Live class results</p><h2>${esc(v.title)}</h2>
-     <div class="lv-bar"><span class="lv-count" id="lvn">0</span><span>responses<br><span class="lv-live"><i></i>updating live</span></span></div></div>
+     <div class="lv-bar"><span class="lv-count" id="lvn">0</span><span>responses<br><span class="lv-live"><i></i>updating live · answers from the last 90 minutes</span></span></div></div>
      <div class="lv-join"><div id="lvqr"></div><div><b>Scan to join</b><p>${esc(join.replace(/^https?:\/\//,''))}</p><p>No sign-in · anonymous</p></div></div></div>
    <div class="card" id="lvcard"></div>
    <div class="lv-bar">${N>1?`<div class="lv-dots">${v.items.map((_,i)=>`<button data-q="${i}">Q${i+1}</button>`).join('')}</div>`:''}
-     ${isQuiz?'<button id="lvrev">Show correct answer</button>':''}<button id="lvnew" title="Count only answers from now on">New class session</button></div>
+     ${isQuiz?'<button id="lvrev">Show correct answer</button>':''}<button id="lvnew" title="Count only answers from now on (for back-to-back classes)">New class session</button></div>
    ${isQuiz?'<div class="lv-sum" id="lvsum"></div>':''}
    ${LIVE?'':'<p class="note">Live results are not connected yet.</p>'}`;
   try{new QRCode(document.getElementById('lvqr'),{text:join,width:132,height:132,colorDark:'#0F3D3E',colorLight:'#ffffff'})}catch(e){}
